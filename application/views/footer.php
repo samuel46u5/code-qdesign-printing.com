@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="p-b-9">
-                    <a href="<?php echo base_url('pages/reset-password')?>" class="s-text8">
+                    <a href="<?php echo base_url('pages/reset-password') ?>" class="s-text8">
                         Reset Password
                     </a>
                 </li>
@@ -74,7 +74,7 @@
             <h4 class="s-text23 p-b-30">
                 Newsletter
             </h4>
-            <form action="<?php echo base_url('Home/store_email_sub')?>" method="post">
+            <form action="<?php echo base_url('Home/store_email_sub') ?>" method="post">
                 <div class="effect1 w-size9">
                     <input class="s-text bo-rad-5 bg6 w-full p-b-5" type="text" name="email" placeholder="email@example.com">
                     <span class="effect1-line"></span>
@@ -89,13 +89,13 @@
     </div>
     <div class="t-center">
         <div class="t-center s-text8">
-            Copyright © <?php echo date('Y'); ?> All rights reserved | <?php echo $profile->companyName; ?> | project by @ng_bayu
+            Copyright © <?php echo date('Y'); ?> All rights reserved | <?php echo $profile->companyName; ?>
         </div>
     </div>
-    
-<a href="https://smallseotools.com/visitor-hit-counter/" target="_blank" title="Visitor Hit Counter">
-<img src="https://smallseotools.com/counterDisplay?code=3093ff38fedfe3fd84a0f5064a04d007&style=0012&pad=5&type=ip&initCount=0"  title="Visitor Hit Counter" Alt="Visitor Hit Counter" border="0">
-</a>
+
+    <a href="https://smallseotools.com/visitor-hit-counter/" target="_blank" title="Visitor Hit Counter">
+        <img src="https://smallseotools.com/counterDisplay?code=3093ff38fedfe3fd84a0f5064a04d007&style=0012&pad=5&type=ip&initCount=0" title="Visitor Hit Counter" Alt="Visitor Hit Counter" border="0">
+    </a>
 
 
 </footer>
@@ -121,73 +121,82 @@
 <script src="<?php echo base_url('asset/') ?>js/main.js"></script>
 <script src="<?php echo base_url('asset/') ?>js/jquery.sticky.min.js"></script>
 <!-- <script src="<?php echo site_url('asset/js/imagezoom.js') ?>"></script> -->
-    <script src="<?php echo base_url('asset/') ?>js/typeahead-handlebars.js" type="text/javascript"></script>
-    <script src="<?php echo base_url('asset/') ?>js/typeahead.bundle.js" type="text/javascript"></script> 
+<script src="<?php echo base_url('asset/') ?>js/typeahead-handlebars.js" type="text/javascript"></script>
+<script src="<?php echo base_url('asset/') ?>js/typeahead.bundle.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $.ajax({url: "<?php echo base_url('Cart/load_qty_cart') ?>", success: function (resp) {
+    $(document).ready(function() {
+        $.ajax({
+            url: "<?php echo base_url('Cart/load_qty_cart') ?>",
+            success: function(resp) {
                 $('#qty-cart-a').html(resp);
                 $('#qty-cart-b').html(resp);
                 $('#qty-cart-c').html(resp);
-            }});
+            }
+        });
         getList();
     });
+
     function getList() {
-        $.ajax({url: "<?php echo base_url('Cart/load_list_cart') ?>", success: function (resp) {
-            $('#list-cart-a').html(resp);
-            $('#list-cart-b').html(resp);
-            $('#list-cart-c').html(resp);
-        }});
+        $.ajax({
+            url: "<?php echo base_url('Cart/load_list_cart') ?>",
+            success: function(resp) {
+                $('#list-cart-a').html(resp);
+                $('#list-cart-b').html(resp);
+                $('#list-cart-c').html(resp);
+            }
+        });
     }
     $(".selection-1").select2({
         minimumResultsForSearch: 20,
         dropdownParent: $('#dropDownSelect1')
     });
-    <?php if(!empty($chatbutton)){?>
-   (function () {
-       var options = {
-           whatsapp: "<?php echo $profile->waPhone;?>", 
-           call_to_action: "<?php echo $chatbutton->widgetCta;?>", 
-           position: "<?php echo $chatbutton->widgetPosition;?>", 
-       };
-       var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
-       var s = document.createElement('script');
-       s.type = 'text/javascript';
-       s.async = true;
-       s.src = url + '/widget-send-button/js/init.js';
-       s.onload = function () {
-           WhWidgetSendButton.init(host, proto, options);
-       };
-       var x = document.getElementsByTagName('script')[0];
-       x.parentNode.insertBefore(s, x);
-   })();
-<?php } ?>
+    <?php if (!empty($chatbutton)) { ?>
+            (function() {
+                var options = {
+                    whatsapp: "<?php echo $profile->waPhone; ?>",
+                    call_to_action: "<?php echo $chatbutton->widgetCta; ?>",
+                    position: "<?php echo $chatbutton->widgetPosition; ?>",
+                };
+                var proto = document.location.protocol,
+                    host = "whatshelp.io",
+                    url = proto + "//static." + host;
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.src = url + '/widget-send-button/js/init.js';
+                s.onload = function() {
+                    WhWidgetSendButton.init(host, proto, options);
+                };
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            })();
+    <?php } ?>
 </script>
 <script>
-$(document).ready(function(){
-    var sample_data = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        prefetch: '<?php echo base_url('Home/search_global')?>',
-        remote: {
-            url: '<?php echo base_url('Home/search_global')?>/%QUERY',
-            wildcard: '%QUERY'
-        }
+    $(document).ready(function() {
+        var sample_data = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            prefetch: '<?php echo base_url('Home/search_global') ?>',
+            remote: {
+                url: '<?php echo base_url('Home/search_global') ?>/%QUERY',
+                wildcard: '%QUERY'
+            }
+        });
+        $('#prefetch .typeahead').typeahead(null, {
+            name: 'sample_data',
+            display: 'name',
+            source: sample_data,
+            limit: 10,
+            templates: {
+                suggestion: Handlebars.compile('<div class="row row-search-global" onclick="searchProduct({{slug}})"><div class="col-md-3" style="padding-right:2px; padding-left:5px;"><img src="{{image}}" class="img-thumbnail" width="80" /></div><div class="col-md-9">{{name}}</div></div>')
+            }
+        });
+
+        $(".row-search-global").click(function() {});
     });
-    $('#prefetch .typeahead').typeahead(null, {
-        name: 'sample_data',
-        display: 'name',
-        source: sample_data,
-        limit:10,
-        templates: {
-            suggestion: Handlebars.compile('<div class="row row-search-global" onclick="searchProduct({{slug}})"><div class="col-md-3" style="padding-right:2px; padding-left:5px;"><img src="{{image}}" class="img-thumbnail" width="80" /></div><div class="col-md-9">{{name}}</div></div>')
-        }
-    });
-    
-    $(".row-search-global").click(function(){
-});
-});
-function searchProduct(slug){
-    location.replace('<?php echo base_url('pages/product-detail/');?>'+slug);
-}
+
+    function searchProduct(slug) {
+        location.replace('<?php echo base_url('pages/product-detail/'); ?>' + slug);
+    }
 </script>
