@@ -24,8 +24,8 @@ Primary use:  Online Store
 [COLOR CODES]
 
 # Text Color      :  coklat
-# Primary Color 01:  #80ff10
-# Primary Color 02:  #80ff10 
+# Primary Color 01:  #6AC1FC
+# Primary Color 02:  #6AC1FC 
 # Primary Color 03:  
 
 ------------------------------------------------------------------*/
@@ -129,7 +129,7 @@ a:focus {
 
 a:hover {
     text-decoration: none;
-    color: #80ff10;
+    color: #6AC1FC;
 }
 
 .sec-title-centered {
@@ -307,12 +307,12 @@ iframe {
 .search-global {
     width: 204px;
     box-sizing: border-box;
-    border-bottom: 2px solid #80ff10 !important;
+    border-bottom: 2px solid #6AC1FC !important;
     font-size: 14px;
     padding: 12px 20px 12px 20px;
     -webkit-transition: width 0.4s ease-in-out !important;
     transition: width 0.4s ease-in-out;
-    color: #80ff10;
+    color: #6AC1FC;
     background-color: white;
     z-index: 9;
     /*    background-image: url('../img/icons/searchicon.png');
@@ -326,9 +326,9 @@ form.searchglobal button {
     padding: 8px;
     font-weight: 600;
     background: #fff;
-    color: #80ff10;
+    color: #6AC1FC;
     font-size: 19px;
-    border-bottom: 2px solid #80ff10;
+    border-bottom: 2px solid #6AC1FC;
     cursor: pointer;
 }
 
@@ -338,10 +338,10 @@ form.searchglobalmobile button {
     height: auto;
     padding: 12px;
     font-weight: 600;
-    background: #80ff10;
+    background: #6AC1FC;
     color: #fff;
     font-size: 15px;
-    border-bottom: 2px solid #80ff10;
+    border-bottom: 2px solid #6AC1FC;
     cursor: pointer;
 }
 
@@ -356,13 +356,13 @@ form.searchglobalmobile::after {
 }
 
 .img-thumbnail {
-    color: #80ff10 !important;
+    color: #6AC1FC !important;
 }
 
 .search-global-mobile {
     width: 80%;
     margin-left: 20px !important;
-    border-bottom: 1px solid #80ff10 !important;
+    border-bottom: 1px solid #6AC1FC !important;
     font-size: 14px;
     background-color: white;
     background-image: url('../img/icons/searchicon.png');
@@ -370,7 +370,7 @@ form.searchglobalmobile::after {
     background-position: 10px 5px;
     background-repeat: no-repeat;
     padding: 15px 20px 12px 40px;
-    color: #80ff10;
+    color: #6AC1FC;
 }
 
 .search-global:focus {
@@ -439,7 +439,7 @@ p+p {
 .tt-suggestion:hover {
     cursor: pointer;
     color: #fff;
-    background-color: #80ff10;
+    background-color: #6AC1FC;
 }
 
 .tt-suggestion.tt-cursor {
@@ -696,7 +696,7 @@ p+p {
 
 .bts-popup-container .bts-popup-button {
     padding: 5px 25px;
-    border: 2px solid #80ff10;
+    border: 2px solid #6AC1FC;
     display: inline-block;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -705,12 +705,12 @@ p+p {
 }
 
 .bts-popup-button:hover {
-    background-color: #80ff10;
+    background-color: #6AC1FC;
     color: #fff !important;
 }
 
 .bts-popup-container a {
-    color: #80ff10;
+    color: #6AC1FC;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -843,7 +843,7 @@ p+p {
     -o-animation: ball-scale infinite linear .75s;
     animation: ball-scale infinite linear .75s;
     border-radius: 100%;
-    background-color: #80ff10;
+    background-color: #6AC1FC;
 }
 
 @-webkit-keyframes ball-scale {
@@ -1061,12 +1061,12 @@ p+p {
 }
 
 .select2-container .select2-results__option[aria-selected="true"] {
-    background-color: #80ff10;
+    background-color: #6AC1FC;
     color: white;
 }
 
 .select2-container .select2-results__option--highlighted[aria-selected] {
-    background-color: #80ff10;
+    background-color: #6AC1FC;
     color: white;
 }
 
@@ -1358,7 +1358,7 @@ p+p {
 li.sale-noti>a {
     color: #4d2600;
     font-weight: 600;
-    border-bottom: solid 1px #80ff10;
+    border-bottom: solid 1px #6AC1FC;
 }
 
 .main_menu>li:hover>a {
@@ -1383,7 +1383,7 @@ li.sale-noti>a {
     left: 100%;
     width: 225px;
     background-color: #fff;
-    border-bottom: solid 1px #80ff10;
+    border-bottom: solid 1px #6AC1FC;
     opacity: 0;
     visibility: hidden;
     padding-top: 10px;
@@ -1421,10 +1421,10 @@ li.sale-noti>a {
 }
 
 .sub_menu>li:hover>a {
-    color: #80ff10;
+    color: #6AC1FC;
     text-decoration: none;
     font-weight: 600;
-    border-bottom: solid 1px #80ff10;
+    border-bottom: solid 1px #6AC1FC;
 }
 
 
@@ -1768,7 +1768,7 @@ li.sale-noti>a {
 }
 
 .item-menu-mobile {
-    background-color: #80ff10;
+    background-color: #6AC1FC;
 }
 
 .side-menu .main-menu>li>a {
@@ -1824,7 +1824,7 @@ li.sale-noti>a {
 .side-menu .sub-menu a:hover {
     text-decoration: none;
     padding-left: 20px;
-    color: #80ff10 !important;
+    color: #6AC1FC !important;
 }
 
 .side-menu .sub-menu {
@@ -1870,7 +1870,7 @@ li.sale-noti>a {
 */
 
 .topbar2 {
-    background: linear-gradient(90deg, #80ff10, #c89b73, #80ff10);
+    background: linear-gradient(90deg, #6AC1FC, #c89b73, #6AC1FC);
     position: relative;
     display: -webkit-box;
     display: -webkit-flex;
@@ -2156,7 +2156,7 @@ li.sale-noti>a {
 .login_form .form-group input,
 .login_form .form-group select {
     height: 50px !important;
-    border: 1px solid #80ff10 !important;
+    border: 1px solid #6AC1FC !important;
     -webkit-box-shadow: none;
     box-shadow: none;
     outline: none;
@@ -2170,7 +2170,7 @@ li.sale-noti>a {
     height: 50px;
     padding: 12px 20px;
     box-sizing: border-box;
-    border: 1px solid #80ff10 !important;
+    border: 1px solid #6AC1FC !important;
     border-radius: 4px;
     background-color: #f8f8f8;
     resize: none;
@@ -2178,7 +2178,7 @@ li.sale-noti>a {
 
 .form-group textarea {
     color: #4d2600;
-    border: 1px solid #80ff10 !important;
+    border: 1px solid #6AC1FC !important;
 }
 
 .login_form .form-group input.placeholder textarea.placeholder {
@@ -2267,7 +2267,7 @@ li.sale-noti>a {
 
 .update_btn {
     background: transparent;
-    border: 1px solid #80ff10;
+    border: 1px solid #6AC1FC;
     color: #76502e;
     font-family: Montserrat-Regular;
     font-weight: 600;
@@ -2371,7 +2371,7 @@ li.sale-noti>a {
 }
 
 .arrow-slick1:hover {
-    background-color: #80ff10;
+    background-color: #6AC1FC;
 }
 
 .next-slick1 {
@@ -2619,7 +2619,7 @@ li.sale-noti>a {
 }
 
 .swal-button {
-    background-color: #80ff10;
+    background-color: #6AC1FC;
     font-family: Montserrat-Regular;
     font-size: 15px;
     color: white;
@@ -2637,7 +2637,7 @@ li.sale-noti>a {
 }
 
 .swal-button:active {
-    background-color: #80ff10;
+    background-color: #6AC1FC;
 }
 
 .swal-title {
@@ -2852,7 +2852,7 @@ li.sale-noti>a {
 
 .block2-btn-towishlist .icon_heart {
     display: block;
-    color: #80ff10;
+    color: #6AC1FC;
 }
 
 
@@ -3374,7 +3374,7 @@ li.sale-noti>a {
 }
 
 .tag-item:hover {
-    border: 1px solid #80ff10;
+    border: 1px solid #6AC1FC;
 }
 
 
