@@ -90,6 +90,7 @@
     <div class="t-center">
         <div class="t-center s-text8">
             Copyright © <?php echo date('Y'); ?> All rights reserved | <?php echo $profile->companyName; ?>
+
         </div>
     </div>
 

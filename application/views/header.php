@@ -46,9 +46,7 @@
                         <a href="<?php echo base_url('pages/product/search?category=0&price=asc&group=') ?>"><i class="fa fa-navicon"></i> Produk <i class="fa fa-caret-down"></i></a>
                         <?php echo $menucategory; ?>
                     </li>
-                    <li class="<?php echo $activemenu['payment']; ?>">
-                        <a href="<?php echo base_url('pages/confirm-payment') ?>">Galery</a>
-                    </li>
+
                     <li class="<?php echo $activemenu['payment']; ?>">
                         <a href="<?php echo base_url('pages/confirm-payment') ?>">Konfirmasi Pembayaran</a>
                     </li>

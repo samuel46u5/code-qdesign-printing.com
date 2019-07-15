@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -55,6 +55,7 @@ $route['sitemap\.xml'] = "Home/sitemap";
 $route['pages/product-detail/(:any)'] = 'Product/detail_product/$1';
 $route['pages/product/search'] = 'Product/search/';
 $route['pages/product-search/p'] = 'Product/search_product/';
+$route['pages/galery'] = 'Home/galery';
 $route['pages/about'] = 'Home/about';
 $route['pages/contact'] = 'Home/contact';
 $route['default_controller'] = 'Home/home';
@@ -78,4 +79,3 @@ $route['pages/order-search'] = "Order/track_order_result/";
 $route['pages/profile'] = "Home/data_profile_partner/";
 $route['pages/reset-password'] = "User/f_reset_password/";
 $route['pages/create-new-password'] = "User/f_new_password/";
-

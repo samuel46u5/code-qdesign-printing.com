@@ -1,10 +1,12 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Product extends CI_Controller {
+class Product extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model(array('M_company', 'M_design', 'M_product', 'M_category', 'M_ads', 'M_widget', 'M_cs'));
         $this->load->database();
@@ -12,7 +14,8 @@ class Product extends CI_Controller {
         $this->perPage = 3;
     }
 
-    function detail_product($slug) {
+    function detail_product($slug)
+    {
         $productdetail = $this->M_product->data_detail_product_by_slug($slug)->row();
         if ($this->agent->is_browser()) {
             $agent = $this->agent->browser() . ' ' . $this->agent->version();
@@ -51,7 +54,8 @@ class Product extends CI_Controller {
         $this->load->view('frontend/detail_product', $data);
     }
 
-    function all_product() {
+    function all_product()
+    {
         $profil = $this->M_company->data_company()->row();
         $data['title'] = $profil->tagcompanyDescription . " | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
@@ -69,7 +73,8 @@ class Product extends CI_Controller {
         $this->load->view('frontend/product', $data);
     }
 
-    function product_by_link($link) {
+    function product_by_link($link)
+    {
         $data['title'] = "title";
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
@@ -87,17 +92,18 @@ class Product extends CI_Controller {
         $this->load->view('frontend/product', $data);
     }
 
-//    function a1($parent, $hasil) {
-//        $w = $this->db->query("SELECT * from t_category where idparent='" . $parent . "'");
-//        foreach ($w->result() as $h) {
-//            $hasil = $this->a1($h->idcategory, $hasil);
-//            $hasil .= $h->idcategory;
-//            $hasil .= ",";
-//        }
-//        return $hasil;
-//    }
+    //    function a1($parent, $hasil) {
+    //        $w = $this->db->query("SELECT * from t_category where idparent='" . $parent . "'");
+    //        foreach ($w->result() as $h) {
+    //            $hasil = $this->a1($h->idcategory, $hasil);
+    //            $hasil .= $h->idcategory;
+    //            $hasil .= ",";
+    //        }
+    //        return $hasil;
+    //    }
 
-    function search() {
+    function search()
+    {
         $profil = $this->M_company->data_company()->row();
         $data['title'] = $profil->tagcompanyDescription . " | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
@@ -114,9 +120,10 @@ class Product extends CI_Controller {
         $data['footer'] = $this->load->view('footer', $data, TRUE);
         $this->load->view('frontend/product', $data);
     }
-    
-    function search_product(){
-       $profil = $this->M_company->data_company()->row();
+
+    function search_product()
+    {
+        $profil = $this->M_company->data_company()->row();
         $data['title'] = $profil->tagcompanyDescription . " | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
@@ -130,25 +137,29 @@ class Product extends CI_Controller {
         $data['chatbutton'] = $this->M_widget->data_widget_by_name_active("Chat Button")->row();
         $data['header'] = $this->load->view('header', $data, TRUE);
         $data['footer'] = $this->load->view('footer', $data, TRUE);
-        $this->load->view('frontend/product_search', $data);  
+        $this->load->view('frontend/product_search', $data);
     }
 
-    function breadcrumb(){
+    function breadcrumb()
+    {
         $id = $this->input->post('category');
         echo $this->M_category->get_breadcrumb($id);
     }
 
-    function count_product_result(){
+    function count_product_result()
+    {
         $id = $this->input->post('category');
         $group = $this->input->post('group');
         echo $this->M_product->count_product_result($id, $group)->row()->result;
     }
-    function count_search_result(){
+    function count_search_result()
+    {
         $productname = $this->input->post('product');
         echo $this->M_product->count_search_result($productname)->row()->result;
     }
 
-    function fetch() {
+    function fetch()
+    {
         $str = "'";
         $output = '';
         $data = $this->M_product->fetch_data($this->input->post('limit'), $this->input->post('start'), $this->input->post('category'), $this->input->post('price'), $this->input->post('group'));
@@ -161,10 +172,10 @@ class Product extends CI_Controller {
                 $output .= ' <div class="col-sm-6 col-md-6 col-lg-4 p-b-50">
                 <div class="block2">';
                 $output .= ($row->pricesale != "") ?
-                '<div class="block2-img wrap-pic-w hov-img-zoom of-hidden pos-relative block2-labelsale">
-                <span class="sale-precent-blok">'.floor(($row->price-$row->pricesale)/$row->price*100).'% OFF</span>
+                    '<div class="block2-img wrap-pic-w hov-img-zoom of-hidden pos-relative block2-labelsale">
+                <span class="sale-precent-blok">' . floor(($row->price - $row->pricesale) / $row->price * 100) . '% OFF</span>
                 ' : '<div class="block2-img wrap-pic-w hov-img-zoom of-hidden pos-relative block2-labelnew">';
-                $output .= '<img src="' . site_url('asset/img/uploads/product/' . $row->fotoName . '') . '" class="bo18" alt="'.$row->productName.'">
+                $output .= '<img src="' . site_url('asset/img/uploads/product/' . $row->fotoName . '') . '" class="bo18" alt="' . $row->productName . '">
                 <div class="block2-overlay trans-0-4">
                 <div class="block2-btn-addcart w-size1 trans-0-4">
                 <button onclick="window.location.href=' . $str . '' . base_url('pages/product-detail/' . $row->postSlug . '') . '' . $str . '" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
@@ -178,7 +189,7 @@ class Product extends CI_Controller {
                 ' . $row->productName . '
                 </a>';
                 $output .= ($row->pricesale != "") ?
-                '
+                    '
                 <div class="text-center">
                 <span class="block2-oldprice m-text7 text-center">
                 Rp.  ' . number_format($row->price) . '
@@ -186,8 +197,7 @@ class Product extends CI_Controller {
                 <span class="block2-newprice m-text8 text-center">
                 Rp. ' . number_format($row->pricesale) . ' 
                 </span>
-                </div>' :
-                '<div class="text-center">
+                </div>' : '<div class="text-center">
                 <span class="block2-price m-text6 text-center">
                 Rp.  ' . number_format($row->price) . '
                 </span>
@@ -199,8 +209,9 @@ class Product extends CI_Controller {
             echo $output;
         }
     }
-        
-    function fetch_search() {
+
+    function fetch_search()
+    {
         $str = "'";
         $output = '';
         $data = $this->M_product->fecth_data_search($this->input->post('limit'), $this->input->post('start'), $this->input->post('productname'));
@@ -214,10 +225,10 @@ class Product extends CI_Controller {
                 $output .= ' <div class="col-sm-6 col-md-6 col-lg-4 p-b-50">
                 <div class="block2">';
                 $output .= ($row->pricesale != "") ?
-                '<div class="block2-img wrap-pic-w hov-img-zoom of-hidden pos-relative block2-labelsale">
-                <span class="sale-precent-blok">'.floor(($row->price-$row->pricesale)/$row->price*100).'% OFF</span>
+                    '<div class="block2-img wrap-pic-w hov-img-zoom of-hidden pos-relative block2-labelsale">
+                <span class="sale-precent-blok">' . floor(($row->price - $row->pricesale) / $row->price * 100) . '% OFF</span>
                 ' : '<div class="block2-img wrap-pic-w hov-img-zoom of-hidden pos-relative block2-labelnew">';
-                $output .= '<img src="' . site_url('asset/img/uploads/product/' . $row->fotoName . '') . '" class="bo18" alt="'.$row->productName.'">
+                $output .= '<img src="' . site_url('asset/img/uploads/product/' . $row->fotoName . '') . '" class="bo18" alt="' . $row->productName . '">
                 <div class="block2-overlay trans-0-4">
                 <div class="block2-btn-addcart w-size1 trans-0-4">
                 <button onclick="window.location.href=' . $str . '' . base_url('pages/product-detail/' . $row->postSlug . '') . '' . $str . '" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
@@ -231,7 +242,7 @@ class Product extends CI_Controller {
                 ' . $row->productName . '
                 </a>';
                 $output .= ($row->pricesale != "") ?
-                '
+                    '
                 <div class="text-center">
                 <span class="block2-oldprice m-text7 text-center">
                 Rp.  ' . number_format($row->price) . '
@@ -239,8 +250,7 @@ class Product extends CI_Controller {
                 <span class="block2-newprice m-text8 text-center">
                 Rp. ' . number_format($row->pricesale) . ' 
                 </span>
-                </div>' :
-                '<div class="text-center">
+                </div>' : '<div class="text-center">
                 <span class="block2-price m-text6 text-center">
                 Rp.  ' . number_format($row->price) . '
                 </span>
@@ -252,33 +262,36 @@ class Product extends CI_Controller {
         }
         echo $output;
     }
-    
-    function cek_qty() {
+
+    function cek_qty()
+    {
         $id = $this->input->post('id');
         $product = $this->M_product->product_by_id($id)->row();
         echo $product->quantityStock;
     }
 
-    function search_code_voucher() {
+
+
+    function search_code_voucher()
+    {
         $curdate = mdate('%Y-%m-%d');
         $code = $this->input->post('voucher');
         $totalprice = $this->input->post('totalprice');
         $data = $this->M_voucher->get_voucher_by_code($code)->row();
         if (empty($data)) {
             $result = "<small style='color:red;'>Maaf, code voucher tidak di temukan</small>";
-        }elseif($data->endDate < $curdate){
+        } elseif ($data->endDate < $curdate) {
             $result = "<small style='color:red;'>Maaf, code voucher tidak di temukan atau sudah kadaluarsa</small>";
-        }elseif($totalprice < $data->minTransaction){
-            $result = "<small style='color:red;'>Maaf, Anda tidak dapat menggunakan voucher ini. Belanja minimum Rp. ".number_format($data->minTransaction)." <br>Total belanja Anda Rp. ".number_format($totalprice)."</small>";
-        }else {
+        } elseif ($totalprice < $data->minTransaction) {
+            $result = "<small style='color:red;'>Maaf, Anda tidak dapat menggunakan voucher ini. Belanja minimum Rp. " . number_format($data->minTransaction) . " <br>Total belanja Anda Rp. " . number_format($totalprice) . "</small>";
+        } else {
             $str = "'";
             $result = '<div class="bo21 p-l-10 p-t-10 p-r-10 p-b-10 fs-13">'
-                    . 'Selamat, Voucher ' . $data->voucherName . '(' . $data->voucherCode . ') Tersedia <br>'
-                    . 'Anda hemat s/d Rp. ' . number_format($data->voucherPrice) . ''
-                    . '</div>'
-                    . '<button class="btn-sm btn-block bg-hover-brown fs-13" onclick="useVoucher(' . $str . '' . $data->voucherPrice . '' . $str . ',' . $str . '' . $data->idvoucher . '' . $str . ');">Gunakan Voucher ini</button>';
+                . 'Selamat, Voucher ' . $data->voucherName . '(' . $data->voucherCode . ') Tersedia <br>'
+                . 'Anda hemat s/d Rp. ' . number_format($data->voucherPrice) . ''
+                . '</div>'
+                . '<button class="btn-sm btn-block bg-hover-brown fs-13" onclick="useVoucher(' . $str . '' . $data->voucherPrice . '' . $str . ',' . $str . '' . $data->idvoucher . '' . $str . ');">Gunakan Voucher ini</button>';
         }
         echo $result;
     }
-
 }
