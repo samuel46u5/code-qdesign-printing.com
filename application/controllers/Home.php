@@ -1,15 +1,18 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-class Home extends CI_Controller {
-    public function __construct() {
+defined('BASEPATH') or exit('No direct script access allowed');
+class Home extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
-        $this->load->model(array('M_widget','M_company', 'M_design', 'M_product', 'M_category', 'M_user', 'M_contact', 'M_ads'));
+        $this->load->model(array('M_widget', 'M_company', 'M_design', 'M_product', 'M_category', 'M_user', 'M_contact', 'M_ads'));
         $this->load->database();
     }
 
-    function home() {
+    function home()
+    {
         $profil = $this->M_company->data_company()->row();
-        $data['title'] = $profil->tagcompanyDescription." | ".$profil->companyName;
+        $data['title'] = $profil->tagcompanyDescription . " | " . $profil->companyName;
         $data['activemenu'] = array('home' => "sale-noti", 'product' => "", 'cart' => "", 'trackorder' => "", 'payment' => "", 'sale' => "", 'about' => "", 'contact' => "");
         $data['menucategory'] = $this->M_category->tree_menu_home(0, "");
         $data['menucategorymobile'] = $this->M_category->tree_menu_mobile(0, "");
@@ -32,12 +35,13 @@ class Home extends CI_Controller {
         $this->load->view('frontend/home', $data);
     }
 
-    function cart() {
+    function cart()
+    {
         $profil = $this->M_company->data_company()->row();
-        $data['title'] = "Keranjang Belanja | ".$profil->companyName;
+        $data['title'] = "Keranjang Belanja | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
-        $data['activemenu'] = array('home' => "", 'product' => "sale-noti",'cart' => "", 'trackorder' => "", 'payment' => "", 'sale' => "", 'about' => "", 'contact' => "");
+        $data['activemenu'] = array('home' => "", 'product' => "sale-noti", 'cart' => "", 'trackorder' => "", 'payment' => "", 'sale' => "", 'about' => "", 'contact' => "");
         $data['menucategory'] = $this->M_category->tree_menu_home(0, "");
         $data['menucategorymobile'] = $this->M_category->tree_menu_mobile(0, "");
         $data['profile'] = $this->M_company->data_company()->row();
@@ -47,9 +51,10 @@ class Home extends CI_Controller {
         $this->load->view('frontend/cart', $data);
     }
 
-    function checkout() {
+    function checkout()
+    {
         $profil = $this->M_company->data_company()->row();
-        $data['title'] = "Checkout Belanja | ".$profil->companyName;
+        $data['title'] = "Checkout Belanja | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
         $data['chatbutton'] = $this->M_widget->data_widget_by_name_active("Chat Button")->row();
@@ -58,9 +63,10 @@ class Home extends CI_Controller {
         $this->load->view('frontend/v_checkout', $data);
     }
 
-    function checkout_method() {
+    function checkout_method()
+    {
         $profil = $this->M_company->data_company()->row();
-        $data['title'] = "Checkout Belanja | ".$profil->companyName;
+        $data['title'] = "Checkout Belanja | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
         $data['chatbutton'] = $this->M_widget->data_widget_by_name_active("Chat Button")->row();
@@ -68,10 +74,11 @@ class Home extends CI_Controller {
         $data['footer'] = $this->load->view('footer', $data, TRUE);
         $this->load->view('frontend/v_checkout_method', $data);
     }
-    
-    function about() {
+
+    function about()
+    {
         $profil = $this->M_company->data_company()->row();
-        $data['title'] = "Tentang Kami | ".$profil->companyName;
+        $data['title'] = "Tentang Kami | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
         $data['bannertitlepage'] = $this->M_design->data_banner_by_pos("bannertitlepage")->row();
@@ -84,10 +91,11 @@ class Home extends CI_Controller {
         $data['footer'] = $this->load->view('footer', $data, TRUE);
         $this->load->view('frontend/about', $data);
     }
-    
-    function contact() {
+
+    function contact()
+    {
         $profil = $this->M_company->data_company()->row();
-        $data['title'] = "Pusat Bantuan | ".$profil->companyName;
+        $data['title'] = "Pusat Bantuan | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
         $data['bannertitlepage'] = $this->M_design->data_banner_by_pos("bannertitlepage")->row();
@@ -100,8 +108,9 @@ class Home extends CI_Controller {
         $data['footer'] = $this->load->view('footer', $data, TRUE);
         $this->load->view('frontend/contact', $data);
     }
-    
-    function store_contact(){
+
+    function store_contact()
+    {
         $data = array(
             'name' => $this->input->post('name'),
             'phone' => $this->input->post('phone'),
@@ -110,13 +119,15 @@ class Home extends CI_Controller {
         );
         $this->M_contact->store_contact($data);
     }
-    
-    function data_profile_partner(){
+
+    function data_profile_partner()
+    {
         $id = $this->session->userdata('iduser');
         $data['title'] = "contact";
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
-        $data['user'] = $this->M_user->user_by_id($id)->row();$data['activemenu'] = array('home' => "", 'product' => "", 'cart' => "", 'trackorder' => "", 'payment' => "", 'sale' => "", 'about' => "", 'contact' => "sale-noti");
+        $data['user'] = $this->M_user->user_by_id($id)->row();
+        $data['activemenu'] = array('home' => "", 'product' => "", 'cart' => "", 'trackorder' => "", 'payment' => "", 'sale' => "", 'about' => "", 'contact' => "sale-noti");
         $data['menucategory'] = $this->M_category->tree_menu_home(0, "");
         $data['menucategorymobile'] = $this->M_category->tree_menu_mobile(0, "");
         $data['profile'] = $this->M_company->data_company()->row();
@@ -126,12 +137,14 @@ class Home extends CI_Controller {
         $this->load->view('frontend/profile', $data);
     }
 
-    function store_email_sub(){
+    function store_email_sub()
+    {
         $data = array('email' => $this->input->post('email'));
         $this->M_contact->store_email_sub($data);
     }
 
-    function search_global(){
+    function search_global()
+    {
         echo $this->M_product->fetch_data_autocomplete($this->uri->segment(3));
     }
 }
