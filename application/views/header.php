@@ -6,12 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="theme-color" content="#825a2c">
-    <meta name="msapplication-navbutton-color" content="#825a2c">
+    <meta name="theme-color" content="2F80C2">
+    <meta name="msapplication-navbutton-color" content="2F80C2">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" charset="#825a2c">
+    <meta name="apple-mobile-web-app-status-bar-style" charset="2F80C2">
     <meta name="keywords" content="<?php echo $profile->tagcompanyDescription; ?>" />
     <meta name="description" content="<?php echo $profile->tagcompanyDescription; ?>" />
+
+
 
     <link rel="icon" type="image/png" href="<?php echo base_url('asset/img/uploads/banner/') ?><?php if (!empty($icontitle->image)) {
                                                                                                     echo $icontitle->image;

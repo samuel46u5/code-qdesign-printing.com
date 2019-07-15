@@ -162,7 +162,7 @@ class Home extends CI_Controller
         $data['chatbutton'] = $this->M_widget->data_widget_by_name_active("Chat Button")->row();
         $data['header'] = $this->load->view('header', $data, TRUE);
         $data['footer'] = $this->load->view('footer', $data, TRUE);
-        $this->load->view('frontend/galery', $data);
+        $this->load->view('frontend/galeryfoto', $data);
     }
 
     function galeryvideo()
