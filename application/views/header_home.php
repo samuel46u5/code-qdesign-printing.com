@@ -96,7 +96,7 @@
                         <?php echo $menucategory; ?>
                     </li>
                     <li class="<?php echo $activemenu['payment']; ?>">
-                        <a href="<?php echo base_url('pages/confirm-payment') ?>">Galery</a>
+                        <a href="<?php echo base_url('pages/galery') ?>">Galery</a>
                     </li>
                     <li class="<?php echo $activemenu['payment']; ?>">
                         <a href="<?php echo base_url('pages/confirm-payment') ?>">Konfirmasi Pembayaran</a>
