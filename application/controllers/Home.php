@@ -147,4 +147,9 @@ class Home extends CI_Controller
     {
         echo $this->M_product->fetch_data_autocomplete($this->uri->segment(3));
     }
+
+    function galery()
+    {
+        $this->load->view('frontend/galery');
+    }
 }
