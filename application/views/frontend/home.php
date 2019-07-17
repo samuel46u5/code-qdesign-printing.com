@@ -338,7 +338,7 @@
 
     </div>
 </section>
-<section class="shipping bggray p-t-5 p-b-5">
+<section class="shipping bggray p-t-5 p-b-20">
     <center>
 
         <h4 class="m-text12 t-center">
