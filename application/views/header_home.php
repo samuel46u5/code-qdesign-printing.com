@@ -92,7 +92,7 @@
             <nav class="menu">
                 <ul class="main_menu">
                     <li class="<?php echo $activemenu['product']; ?>">
-                        <a href="<?php echo base_url('pages/product/search?category=0&price=asc&group=') ?>"><i class="fa fa-navicon"></i> Produk <i class="fa fa-caret-down"></i></a>
+                        <a href="<?php echo base_url('pages/product/search?category=0&price=asc&group=') ?>"><i class="fa fa-navicon"></i> Kategori <i class="fa fa-caret-down"></i></a>
                         <?php echo $menucategory; ?>
                     </li>
 
@@ -207,7 +207,7 @@
                     <nav class="menu">
                         <ul class="main_menu">
                             <li class="<?php echo $activemenu['product']; ?>">
-                                <a href="<?php echo base_url('pages/product/search?category=0&price=asc&group=') ?>"><i class="fa fa-navicon"></i> Product <i class="fa fa-caret-down"></i></a>
+                                <a href="<?php echo base_url('pages/product/search?category=0&price=asc&group=') ?>"><i class="fa fa-navicon"></i> Kategori <i class="fa fa-caret-down"></i></a>
                                 <?php echo $menucategory; ?>
                             </li>
                             <li class="">

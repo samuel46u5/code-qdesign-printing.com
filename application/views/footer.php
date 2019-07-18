@@ -1,5 +1,5 @@
-<footer class="p-t-25 p-b-30 p-l-45 p-r-45" id="footer">
-    <div class="flex-w p-b-20">
+<footer class="p-t-10 p-b-10 p-l-45 p-r-45" id="footer">
+    <!-- <div class="flex-w p-b-20">
         <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
             <h4 class="s-text23 p-b-30">
                 Alamat
@@ -86,17 +86,18 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> -->
     <div class="t-center">
         <div class="t-center s-text8">
             Copyright © <?php echo date('Y'); ?> All rights reserved | <?php echo $profile->companyName; ?>
 
         </div>
+        <a href="https://smallseotools.com/visitor-hit-counter/" target="_blank" title="Visitor Hit Counter">
+            <img src="https://smallseotools.com/counterDisplay?code=3093ff38fedfe3fd84a0f5064a04d007&style=0012&pad=5&type=ip&initCount=0" title="Visitor Hit Counter" Alt="Visitor Hit Counter" border="0">
+        </a>
+
     </div>
 
-    <a href="https://smallseotools.com/visitor-hit-counter/" target="_blank" title="Visitor Hit Counter">
-        <img src="https://smallseotools.com/counterDisplay?code=3093ff38fedfe3fd84a0f5064a04d007&style=0012&pad=5&type=ip&initCount=0" title="Visitor Hit Counter" Alt="Visitor Hit Counter" border="0">
-    </a>
 
 
 </footer>
