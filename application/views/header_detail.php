@@ -278,16 +278,27 @@
                                 <?php echo $menucategory; ?>
                             </li>
                             <li class="">
-                                <a href="<?php echo base_url('pages/galery') ?>">Galery</a>
+                                <i class="fa fa-picture-o"></i> <a href="<?php echo base_url('pages/galery') ?>"> Galery</a>
+                                <ul class='sub_menu'>
+                                    <li>
+                                        <i class="fa fa-camera"></i> <a href="<?php echo base_url('pages/galery') ?>">Foto </a>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-video-camera"></i><a href="<?php echo base_url('pages/galery') ?>">Video </a>
+                                    </li>
+                                </ul>
+
                             </li>
                             <li class="">
-                                <a href="<?php echo base_url('pages/galery') ?>">Bantuan</a>
+                                <i class="fa fa-question-circle-o"></i><a href="<?php echo base_url('pages/galery') ?>"> Bantuan</a>
                             </li>
                             <li class="">
-                                <a href="<?php echo base_url('pages/galery') ?>">Tentang</a>
+                                <i class="fa fa-info-circle"></i><a href="<?php echo base_url('pages/galery') ?>"> Info</a>
                             </li>
                             <li class="<?php echo $activemenu['payment']; ?>">
-                                <a href="<?php echo base_url('pages/confirm-payment') ?>">Konfirmasi Pembayaran</a>
+                                <i class="fa fa-money"> </i><a href="<?php echo base_url('pages/confirm-payment') ?>"> Konfirmasi Pembayaran</a>
+                            </li>
+                            <li>
                             </li>
                         </ul>
                     </nav>
