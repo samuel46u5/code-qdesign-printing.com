@@ -19,6 +19,7 @@
                                                                                                 ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/') ?>vendors/bootstrap2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/') ?>fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/') ?>fonts/themify/themify-icons.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/') ?>fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/') ?>fonts/elegant-font/html-css/style.css">
@@ -33,6 +34,23 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/') ?>css/util.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/') ?>css/main.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/') ?>vendors/sweetalert/sweetalert.css">
+
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/fonts/themify/themify-icons.css">
+
+    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/slick.css">
+    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/slick-theme.css">
+    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/all.css">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/style2.css">
+    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/responsive.css">
+
+
+
+
     <?php
     if (!empty($fbpixel)) {
         if ($fbpixel->adsStatus == "Active") {
@@ -66,6 +84,8 @@
     }
 }
 ?>
+
+
 </head>
 
 <body class="animsition">
