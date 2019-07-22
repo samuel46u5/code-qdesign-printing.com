@@ -30,6 +30,7 @@
                 <p class="p-b-28">
                     Modified and rebuild by : <br>
                     Agus Pranoto <br>
+                    Qdesign Digital Printing
                 </p>
 
             </div>
