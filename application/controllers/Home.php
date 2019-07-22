@@ -92,6 +92,23 @@ class Home extends CI_Controller
         $this->load->view('frontend/about', $data);
     }
 
+    function credits()
+    {
+        $profil = $this->M_company->data_company()->row();
+        $data['title'] = "Tentang Kami | " . $profil->companyName;
+        $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
+        $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
+        $data['bannertitlepage'] = $this->M_design->data_banner_by_pos("bannertitlepage")->row();
+        $data['activemenu'] = array('home' => "", 'product' => "", 'cart' => "", 'trackorder' => "", 'payment' => "", 'sale' => "", 'about' => "sale-noti", 'contact' => "");
+        $data['menucategory'] = $this->M_category->tree_menu_home(0, "");
+        $data['menucategorymobile'] = $this->M_category->tree_menu_mobile(0, "");
+        $data['profile'] = $this->M_company->data_company()->row();
+        $data['chatbutton'] = $this->M_widget->data_widget_by_name_active("Chat Button")->row();
+        $data['header'] = $this->load->view('header', $data, TRUE);
+        $data['footer'] = $this->load->view('footer', $data, TRUE);
+        $this->load->view('frontend/credits', $data);
+    }
+
     function contact()
     {
         $profil = $this->M_company->data_company()->row();

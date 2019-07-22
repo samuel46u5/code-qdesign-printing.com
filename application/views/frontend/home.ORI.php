@@ -66,6 +66,7 @@
         </div>
     </div>
 </div>
+
 <?php if (!empty($productsale)) { ?>
     <section class="newproduct bggray p-t-30 p-b-35">
         <div class="container">

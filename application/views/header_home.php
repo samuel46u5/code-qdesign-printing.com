@@ -51,6 +51,7 @@
 
 
 
+
     <?php
     if (!empty($fbpixel)) {
         if ($fbpixel->adsStatus == "Active") {
@@ -132,6 +133,17 @@
                     </li>
                     <li class="">
                         <i class="fa fa-info-circle"></i><a href="<?php echo base_url('pages/galery') ?>"> Info</a>
+                        <ul class='sub_menu'>
+                            <li>
+                                <i class="fa fa-id-card-o"></i> <a href="<?php echo base_url('pages/about') ?>"> Tentang Kami </a>
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i><a href="<?php echo base_url('pages/contact') ?>">Kontak Kami </a>
+                            </li>
+                            <li>
+                                <i class="fa fa-users"></i><a href="<?php echo base_url('pages/credits') ?>">Credits </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="<?php echo $activemenu['payment']; ?>">
                         <i class="fa fa-money"> </i><a href="<?php echo base_url('pages/confirm-payment') ?>"> Konfirmasi Pembayaran</a>

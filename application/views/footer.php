@@ -1,4 +1,4 @@
-<footer class="p-t-10 p-b-10 p-l-45 p-r-45" id="footer">
+<footer class="p-t-10 p-b-10 p-l-45 p-r-45" id="footer2">
     <!-- <div class="flex-w p-b-20">
         <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
             <h4 class="s-text23 p-b-30">
@@ -89,7 +89,7 @@
     </div> -->
     <div class="t-center">
         <div class="t-center s-text8">
-            Copyright © <?php echo date('Y'); ?> All rights reserved | <?php echo $profile->companyName; ?>
+            Copyright © <?php echo date('Y'); ?> All rights reserved | <?php echo $profile->companyName; ?> | <a href="pages/credits"> Credits </a>
 
         </div>
         <a href="https://smallseotools.com/visitor-hit-counter/" target="_blank" title="Visitor Hit Counter">

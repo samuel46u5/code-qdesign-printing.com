@@ -58,6 +58,7 @@ $route['pages/product-search/p'] = 'Product/search_product/';
 $route['pages/galery'] = 'Home/galery';
 $route['pages/about'] = 'Home/about';
 $route['pages/contact'] = 'Home/contact';
+$route['pages/credits'] = 'Home/credits';
 $route['default_controller'] = 'Home/home';
 $route['translate_uri_dashes'] = FALSE;
 
