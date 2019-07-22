@@ -37,16 +37,16 @@
 
 
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/fonts/themify/themify-icons.css">
 
-    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/slick.css">
+    <!-- <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/slick.css">
     <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/slick-theme.css">
-    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/all.css">
+    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/all.css"> -->
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/style2.css">
-    <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/responsive.css">
+    <!-- <link rel="stylesheet" href="<?php echo base_url('asset/') ?>Vendor2/css/responsive.css"> -->
 
 
 

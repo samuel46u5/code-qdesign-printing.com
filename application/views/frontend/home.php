@@ -140,27 +140,20 @@
 <section id="work" class="section-bottom">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6 p-0">
+
+            <?php foreach ($bannerftop as $value) { ?>
                 <div class="work-block">
-                    <img src="<?php echo site_url('asset/img/uploads/banner/370x390.jpg') ?>" alt="work-img" class="img-fluid">
+                    <!-- <img src="<?php echo site_url('asset/img/uploads/banner/370x390.jpg') ?>" alt="work-img" class="img-fluid"> -->
+                    <img src="<?php echo site_url('asset/img/uploads/banner/' . $value->image . '') ?>" alt="IMG-BLOG" class="img-fluid">
                     <div class="overlay-content-block">
-                        <h4>Probiz portfolio template</h4>
-                        <p>Web Development</p>
-                        <a href="single-project.html"><i class="fa fa-link"></i></a>
+                        <h4><?php echo $value->bannerText; ?></h4>
+                        <!-- <p>Web Development</p> -->
+                        <a href="<?php echo base_url('pages/product/search?category=' . $value->bannerLink . '&price=asc&group='); ?>" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4 bo17">
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 p-0">
-                <div class="work-block">
-                    <img src="<?php echo site_url('asset/img/uploads/banner/370x390.jpg') ?>" alt="work-img" class="img-fluid">
-                    <div class="overlay-content-block">
-                        <h4>Probiz portfolio template</h4>
-                        <p>Web Development</p>
-                        <a href="single-project.html"><i class="fa fa-link"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 p-0">
+            <?php } ?>
+
+            <!-- <div class="col-lg-4 col-md-6 p-0">
                 <div class="work-block">
                     <img src="<?php echo site_url('asset/img/uploads/banner/370x390.jpg') ?>" alt="work-img" class="img-fluid">
                     <div class="overlay-content-block">
@@ -171,7 +164,8 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 p-0">
+
+            <div class="col-lg-4 col-md-6 p-0">
                 <div class="work-block">
                     <img src="<?php echo site_url('asset/img/uploads/banner/370x390.jpg') ?>" alt="work-img" class="img-fluid">
                     <div class="overlay-content-block">
@@ -181,7 +175,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 p-0">
+            <div class="col-lg-4 col-md-6 p-0">
                 <div class="work-block">
                     <img src="<?php echo site_url('asset/img/uploads/banner/370x390.jpg') ?>" alt="work-img" class="img-fluid">
                     <div class="overlay-content-block">
@@ -191,28 +185,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 p-0">
-                <div class="work-block">
-                    <img src="<?php echo site_url('asset/img/uploads/banner/370x390.jpg') ?>" alt="work-img" class="img-fluid">
-                    <div class="overlay-content-block">
-                        <h4>Probiz portfolio template</h4>
-                        <p>Web Development</p>
-                        <a href="single-project.html"><i class="fa fa-link"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 p-0">
-                <div class="work-block">
-                    <img src="<?php echo site_url('asset/img/uploads/banner/370x390.jpg') ?>" alt="work-img" class="img-fluid">
-                    <div class="overlay-content-block">
-                        <h4>Probiz portfolio template</h4>
-                        <p>Web Development</p>
-                        <a href="single-project.html"><i class="fa fa-link"></i></a>
-                    </div>
-                </div>
-            </div>
+        </div> -->
         </div>
-    </div>
 </section>
 
 <!-- Web services
@@ -305,6 +279,7 @@
         </div>
     </div>
 </div>
+
 <?php if (!empty($productsale)) { ?>
     <section class="newproduct bggray p-t-30 p-b-35">
         <div class="container">
