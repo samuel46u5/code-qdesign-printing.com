@@ -140,9 +140,7 @@
                             <li>
                                 <i class="fa fa-envelope-o"></i><a href="<?php echo base_url('pages/contact') ?>">Kontak Kami </a>
                             </li>
-                            <li>
-                                <i class="fa fa-users"></i><a href="<?php echo base_url('pages/credits') ?>">Credits </a>
-                            </li>
+
                         </ul>
                     </li>
                     <li class="<?php echo $activemenu['payment']; ?>">
