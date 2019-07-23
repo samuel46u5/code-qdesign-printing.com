@@ -99,6 +99,8 @@
     </div>
 
 </footer>
+
+
 <div class="btn-back-to-top bg0-hov" id="myBtn">
     <span class="symbol-btn-back-to-top">
         <i class="fa fa-angle-double-up" aria-hidden="true"></i>
@@ -106,6 +108,10 @@
 </div>
 <div id="dropDownSelect1"></div>
 <div id="dropDownSelect2"></div>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.2.0/ekko-lightbox.min.js"></script>
+
 <script type="text/javascript" src="<?php echo base_url('asset/') ?>vendors/jquery2/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url('asset/') ?>vendors/animsition/js/animsition.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url('asset/') ?>vendors/bootstrap2/js/popper.js"></script>
@@ -123,6 +129,11 @@
 <!-- <script src="<?php echo site_url('asset/js/imagezoom.js') ?>"></script> -->
 <script src="<?php echo base_url('asset/') ?>js/typeahead-handlebars.js" type="text/javascript"></script>
 <script src="<?php echo base_url('asset/') ?>js/typeahead.bundle.js" type="text/javascript"></script>
+
+
+
+
+
 <script type="text/javascript">
     $(document).ready(function() {
         $.ajax({

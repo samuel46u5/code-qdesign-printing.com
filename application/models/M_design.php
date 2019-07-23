@@ -1,23 +1,28 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_design extends CI_Model {
+class M_design extends CI_Model
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    function upload_img($data) {
+    function upload_img($data)
+    {
         $this->db->insert('t_banner_image', $data);
         return $this->db->insert_id();
     }
 
-    function data_banner_all() {
+    function data_banner_all()
+    {
         return $this->db->get('t_banner_image');
     }
 
-    function update_status_banner($id, $data) {
+    function update_status_banner($id, $data)
+    {
         $this->db->where('idbannerimage', $id);
         $this->db->update('t_banner_image', $data);
         echo "<script> $.notify({
@@ -32,58 +37,67 @@ class M_design extends CI_Model {
                 </script>";
     }
 
-    function delete_banner($id) {
+    function delete_banner($id)
+    {
         $this->db->where('idbannerimage', $id);
         $this->db->delete('t_banner_image');
     }
 
-    function delete_popup($id) {
+    function delete_popup($id)
+    {
         $this->db->where('idpopup', $id);
         $this->db->delete('t_popup');
     }
 
-    function banner_by_id($id) {
+    function banner_by_id($id)
+    {
         $this->db->select("*")
-                ->where('idbannerimage', $id);
+            ->where('idbannerimage', $id);
         return $this->db->get('t_banner_image');
     }
 
-    function data_banner_by_id($id) {
+    function data_banner_by_id($id)
+    {
         $this->db->select('*')
-                ->from('t_banner_image')
-                ->where('idbannerimage', $id);
+            ->from('t_banner_image')
+            ->where('idbannerimage', $id);
         return $this->db->get();
     }
 
-    function data_popup_by_id($id) {
+    function data_popup_by_id($id)
+    {
         $this->db->select('*')
-                ->from('t_popup')
-                ->where('idpopup', $id);
+            ->from('t_popup')
+            ->where('idpopup', $id);
         return $this->db->get();
     }
 
-    function data_banner_by_type($pos, $sort) {
+    function data_banner_by_type($pos, $sort)
+    {
         $this->db->select('*')
-                ->from('t_banner_image')
-                ->where('bannerPosition', $pos)
-                ->where('sortOrder', $sort);
+            ->from('t_banner_image')
+            ->where('bannerPosition', $pos)
+            ->where('sortOrder', $sort);
         return $this->db->get();
     }
 
-    function data_banner_by_pos($pos) {
+    function data_banner_by_pos($pos)
+    {
         $this->db->select('*')
-                ->from('t_banner_image')
-                ->where('bannerPosition', $pos)
-                ->where('status', 'active')
-                ->order_by('sortOrder', 'DSC');
+            ->from('t_banner_image')
+            ->where('bannerPosition', $pos)
+            ->where('status', 'active')
+            ->order_by('sortOrder', 'DSC');
         return $this->db->get();
     }
 
-    function data_pop_up() {
+    function data_pop_up()
+    {
         return $this->db->get('t_popup');
     }
 
-    function store_popup($data) {
+    function store_popup($data)
+    {
         if (!empty($data['popupType'])) {
             $this->db->insert('t_popup', $data);
             $this->db->insert_id();
@@ -108,7 +122,8 @@ class M_design extends CI_Model {
         }
     }
 
-    function update_data_popup($id, $data) {
+    function update_data_popup($id, $data)
+    {
         $this->db->where('idpopup', $id);
         $this->db->update('t_popup', $data);
         echo "<script> $.notify({
@@ -123,17 +138,20 @@ class M_design extends CI_Model {
                 </script>";
     }
 
-    function data_popup_by_status($status) {
+    function data_popup_by_status($status)
+    {
         $this->db->select('*')
-                ->where('popupStatus', $status);
+            ->where('popupStatus', $status);
         return $this->db->get('t_popup');
     }
 
-    function data_footer_tagline() {
+    function data_footer_tagline()
+    {
         return $this->db->get('t_footer_tagline');
     }
 
-    function store_footer_tagline($data) {
+    function store_footer_tagline($data)
+    {
         $this->db->insert('t_footer_tagline', $data);
         echo "<script> $.notify({
             title: '<strong>Sukses</strong>',
@@ -148,14 +166,15 @@ class M_design extends CI_Model {
         return $this->db->insert_id();
     }
 
-    function delete_footer_tagline($id) {
+    function delete_footer_tagline($id)
+    {
         $this->db->where('id', $id);
         $this->db->delete('t_footer_tagline');
     }
 
-    function count_footer_tagline() {
+    function count_footer_tagline()
+    {
         $this->db->select('COUNT(id) as id');
         return $this->db->get('t_footer_tagline');
     }
-
 }

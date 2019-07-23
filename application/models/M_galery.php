@@ -10,6 +10,15 @@ class M_galery extends CI_Model
         parent::__construct();
     }
 
+    function upload_img($data)
+    {
+
+        // $this->db->insert('t_banner_image', $data);
+        $this->db->insert('t_galery_foto', $data);
+
+        return $this->db->insert_id();
+    }
+
     function data_galery_foto_all()
     {
         $this->db->select('*')->from('t_galery_foto');
@@ -19,17 +28,17 @@ class M_galery extends CI_Model
     function id_galery()
     {
 
-        $this->db->select('SELECT max(idphoto) FROM t_galery_foto');
-        $this->db->limit(1);
-        $query = $this->db->get('t_product');
-        if ($query->num_rows() <> 0) {
-            $data = $query->row();
-            $kode = intval($data->kode) + 1;
-        } else {
-            $kode = 1;
-        }
-        $id_galery = $kode;
+        // $this->db->select('SELECT max(idphoto) FROM t_galery_foto');
+        // $this->db->limit(1);
+        // $query = $this->db->get('t_product');
+        // if ($query->num_rows() <> 0) {
+        //     $data = $query->row();
+        //     $kode = intval($data->kode) + 1;
+        // } else {
+        //     $kode = 1;
+        // }
+        // $id_galery = $kode;
 
-        return $id_galery;
+        // return $id_galery;
     }
 }

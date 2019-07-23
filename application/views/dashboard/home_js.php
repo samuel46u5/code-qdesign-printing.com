@@ -488,21 +488,26 @@
     // ens CRM //
 
     // galery @by agus
+
+
+
+
     function fUploadgalery_Foto() {
         $('#loader').show();
         $.ajax({
-            url: '<?php echo base_url('d/galery/add_galeryfoto'); ?>',
+            url: '<?php echo base_url('d/galery/add_galeryfoto'); ?>', //memangil controller D>Galery>add_galeryfoto
             method: "POST",
             success: function(resp) {
                 $('#data').html(resp);
-                $(".textarea").wysihtml5();
-                $('[data-toggle="tooltip"]').tooltip();
-                hideCC();
                 $('#loader').hide();
-                autocomplete();
+                $('#progresbar').hide();
+                $('[data-toggle="tooltip"]').tooltip();
+                position();
+                $(".sort").hide();
             }
         });
     }
+
 
     function dataGaleryFoto() {
         $('#loader').show();
@@ -511,11 +516,9 @@
             method: "POST",
             success: function(resp) {
                 $('#data').html(resp);
-                $(".textarea").wysihtml5();
-                $('[data-toggle="tooltip"]').tooltip();
-                hideCC();
                 $('#loader').hide();
-                autocomplete();
+                $('#dataTables-datagaleryfoto').DataTable();
+                $('[data-toggle="tooltip"]').tooltip();
             }
         });
     }

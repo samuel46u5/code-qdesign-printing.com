@@ -9,27 +9,28 @@
                 <div class="panel panel-green">
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered dt-responsive nowrap" style="width:100%" id="dataTables-dataproduct">
+                            <table class="table table-striped table-bordered dt-responsive nowrap" style="width:100%" id="dataTables-datagaleryfoto">
                                 <thead>
                                     <tr>
                                         <th>Cover</th>
                                         <th>Nama Foto</th>
                                         <th>Deskripsi</th>
-                                        <th>Status</th>
+                                        <!-- <th>Status</th>
                                         <th>Upload By</th>
                                         <th>Link Produk</th>
-                                        <th>Aksi</th>
+                                        <th>Aksi</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($data as $value) { ?>
                                         <tr class="">
-                                            <td><?php echo $value->idphoto; ?></td>
+                                            <td><img src="<?php echo site_url('asset/img/uploads/galery/') . $value->image; ?>" style="max-width: 180px;"></td>
+                                            <!-- <td><?php echo $value->idphoto; ?></td> -->
                                             <td><?php echo $value->deskripsi; ?></td>
-                                            <td><?php echo $value->aktif; ?></td>
-                                            <td><?php echo $value->idupload; ?></td>
-                                            <td><?php echo $value->link_produk; ?></td>
-                                            <td><?php echo $value->idphoto; ?></td>
+                                            <!-- <td><?php echo $value->aktif; ?></td>
+                                                            <td><?php echo $value->idupload; ?></td>
+                                                            <td><?php echo $value->link_produk; ?></td>
+                                                            <td><?php echo $value->idphoto; ?></td> -->
                                             <td>
                                                 action
                                             </td>

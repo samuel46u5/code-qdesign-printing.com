@@ -5,7 +5,7 @@ class Home extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('M_widget', 'M_company', 'M_design', 'M_product', 'M_category', 'M_user', 'M_contact', 'M_ads'));
+        $this->load->model(array('M_widget', 'M_company', 'M_design', 'M_product', 'M_category', 'M_user', 'M_contact', 'M_ads', 'M_galery'));
         $this->load->database();
     }
 
@@ -168,6 +168,14 @@ class Home extends CI_Controller
     function galeryfoto()
     {
         $profil = $this->M_company->data_company()->row();
+
+        // $data['data_galery'] = $this->M_galery->data_galery_foto_all();
+        $data['galery'] = $this->M_galery->data_galery_foto_all()->result();
+
+        // var_dump($data['galery']);
+        // dir
+
+
         $data['title'] = "Tentang Kami | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
@@ -179,6 +187,7 @@ class Home extends CI_Controller
         $data['chatbutton'] = $this->M_widget->data_widget_by_name_active("Chat Button")->row();
         $data['header'] = $this->load->view('header', $data, TRUE);
         $data['footer'] = $this->load->view('footer', $data, TRUE);
+
         $this->load->view('frontend/galeryfoto', $data);
     }
 
