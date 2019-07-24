@@ -171,9 +171,10 @@ class Home extends CI_Controller
 
         // $data['data_galery'] = $this->M_galery->data_galery_foto_all();
         $data['galery'] = $this->M_galery->data_galery_foto_all()->result();
+        $data['album'] = $this->M_galery->data_galery_album_all()->result();
 
-        // var_dump($data['galery']);
-        // dir
+        // var_dump($data['album']);
+        // die;
 
 
         $data['title'] = "Tentang Kami | " . $profil->companyName;

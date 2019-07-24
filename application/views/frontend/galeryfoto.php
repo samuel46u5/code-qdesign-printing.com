@@ -1,4 +1,9 @@
 <?php echo $header; ?>
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(<?php echo site_url('asset/img/uploads/banner/' . $bannertitlepage->image . '') ?>);">
+    <h2 class="l-text2 t-center m-text-glow">
+        Kontak
+    </h2>
+</section>
 
 <div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-50">
     <a href="<?php echo base_url('') ?>" class="s-text16">
@@ -10,90 +15,41 @@
     </span>
 </div>
 
+<!-- <?php var_dump($galery[2]); ?> -->
 
 <section class="newproduct bgwhite p-t-30 p-b-35">
     <div class="container">
 
 
-        <h2>PORTFOLIO</h2>
+        <h2>Galery</h2> <br>
         <div id="myBtnContainer">
             <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-            <button class="btn" onclick="filterSelection('nature')"> Nature</button>
-            <button class="btn" onclick="filterSelection('cars')"> Cars</button>
-            <button class="btn" onclick="filterSelection('people')"> People</button>
+            <?php foreach ($album as $value) { ?>
+                <button class="btn" onclick="filterSelection('<?php echo $value->nama_album ?>')"> <?php echo $value->nama_album; ?></button>
+            <?php } ?>
         </div>
 
         <!-- Portfolio Gallery Grid -->
         <div class="row">
-            <div class="column nature">
-                <div class="content">
-                    <img src="/w3images/mountains.jpg" alt="Mountains" style="width:100%">
-                    <h4>Mountains</h4>
-                    <p>Lorem ipsum dolor..</p>
-                </div>
-            </div>
-            <div class="column nature">
-                <div class="content">
-                    <img src="/w3images/lights.jpg" alt="Lights" style="width:100%">
-                    <h4>Lights</h4>
-                    <p>Lorem ipsum dolor..</p>
-                </div>
-            </div>
-            <div class="column nature">
-                <div class="content">
-                    <img src="/w3images/nature.jpg" alt="Nature" style="width:100%">
-                    <h4>Forest</h4>
-                    <p>Lorem ipsum dolor..</p>
-                </div>
-            </div>
+            <?php foreach ($galery as $value) { ?>
+                <div class="column <?php echo $value->nama_album; ?>">
 
-            <div class="column cars">
-                <div class="content">
-                    <img src="/w3images/cars1.jpg" alt="Car" style="width:100%">
-                    <h4>Retro</h4>
-                    <p>Lorem ipsum dolor..</p>
-                </div>
-            </div>
-            <div class="column cars">
-                <div class="content">
-                    <img src="/w3images/cars2.jpg" alt="Car" style="width:100%">
-                    <h4>Fast</h4>
-                    <p>Lorem ipsum dolor..</p>
-                </div>
-            </div>
-            <div class="column cars">
-                <div class="content">
-                    <img src="/w3images/cars3.jpg" alt="Car" style="width:100%">
-                    <h4>Classic</h4>
-                    <p>Lorem ipsum dolor..</p>
-                </div>
-            </div>
+                    <div class="content">
 
-            <div class="column people">
-                <div class="content">
-                    <img src="/w3images/people1.jpg" alt="People" style="width:100%">
-                    <h4>Girl</h4>
-                    <p>Lorem ipsum dolor..</p>
+                        <img src="<?php echo site_url('asset/img/uploads/galery/') . $value->image; ?>" class="bo18" alt="Mountains" style="width:100%">
+
+                        <h4><?php echo $value->deskripsi; ?></h4>
+                        <p><?php echo $value->deskripsi; ?></p>
+                    </div>
+
                 </div>
-            </div>
-            <div class="column people">
-                <div class="content">
-                    <img src="/w3images/people2.jpg" alt="People" style="width:100%">
-                    <h4>Man</h4>
-                    <p>Lorem ipsum dolor..</p>
-                </div>
-            </div>
-            <div class="column people">
-                <div class="content">
-                    <img src="/w3images/people3.jpg" alt="People" style="width:100%">
-                    <h4>Woman</h4>
-                    <p>Lorem ipsum dolor..</p>
-                </div>
-            </div>
+            <?php } ?>
             <!-- END GRID -->
         </div>
     </div>
 </section>
+
+
 <script>
     filterSelection("all") // Execute the function and show all columns
     function filterSelection(c) {

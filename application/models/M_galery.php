@@ -21,7 +21,13 @@ class M_galery extends CI_Model
 
     function data_galery_foto_all()
     {
-        $this->db->select('*')->from('t_galery_foto');
+        $this->db->select('*')->from('t_galery_foto')->join('t_album_galery', 't_galery_foto.id_album=t_album_galery.id');
+        return $this->db->get();
+    }
+
+    function data_galery_album_all()
+    {
+        $this->db->select('*')->from('t_album_galery');
         return $this->db->get();
     }
 

@@ -1,4 +1,4 @@
-<footer class="p-t-10 p-b-10 p-l-45 p-r-45" id="footer2">
+<footer class="p-t-10 p-b-10 p-l-45 p-r-45" id="footer_fixed">
     <!-- <div class="flex-w p-b-20">
         <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
             <h4 class="s-text23 p-b-30">

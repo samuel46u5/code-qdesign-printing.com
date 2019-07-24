@@ -40,17 +40,7 @@
             box-sizing: border-box;
         }
 
-        body {
-            background-color: #f1f1f1;
-            padding: 20px;
-            font-family: Arial;
-        }
 
-        /* Center website */
-        .main {
-            max-width: 1000px;
-            margin: auto;
-        }
 
         h1 {
             font-size: 50px;
@@ -111,6 +101,16 @@
         .btn.active {
             background-color: #666;
             color: white;
+        }
+
+        .footer_fixed {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            text-align: center;
         }
     </style>
 
