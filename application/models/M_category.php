@@ -1,19 +1,22 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_category extends CI_Model {
-    function __construct() {
+class M_category extends CI_Model
+{
+    function __construct()
+    {
         parent::__construct();
         $this->load->helper(array('url', 'html'));
     }
 
-    function data_category() {
+    function data_category()
+    {
         return $this->db->get('t_category');
     }
 
-    function store_category($data) {
-        if (!empty($data['categoryName']) || !empty($data['idparent']) || !empty(
-                        $data['categoryDescription']) || !empty($data['categoryLink']) || !empty($data['categoryMetaTag']) || !empty($data['categoryMetaDescription']) || !empty($data['categoryStatus'])) {
+    function store_category($data)
+    {
+        if (!empty($data['categoryName']) || !empty($data['idparent']) || !empty($data['categoryDescription']) || !empty($data['categoryLink']) || !empty($data['categoryMetaTag']) || !empty($data['categoryMetaDescription']) || !empty($data['categoryStatus'])) {
             $this->db->insert('t_category', $data);
             $this->db->insert_id();
             echo "<script> $.notify({
@@ -37,13 +40,15 @@ class M_category extends CI_Model {
         }
     }
 
-    function data_category_all() {
+    function data_category_all()
+    {
         $this->db->select('*')
-                ->grup_by('idparent');
+            ->grup_by('idparent');
         return $this->db->get();
     }
 
-    function delete_category($id) {
+    function delete_category($id)
+    {
         $cek = $this->db->query("SELECT * from t_category where idparent='" . $id . "'");
         if (($cek->num_rows()) > 0) {
             echo "<script> $.notify({
@@ -69,13 +74,15 @@ class M_category extends CI_Model {
         }
     }
 
-    function data_category_by_id($idcategory) {
+    function data_category_by_id($idcategory)
+    {
         $this->db->select('*')
-                ->where('idcategory', $idcategory);
+            ->where('idcategory', $idcategory);
         return $this->db->get('t_category');
     }
 
-    function data_parent_by_id($idcategory) {
+    function data_parent_by_id($idcategory)
+    {
         $idparent = $this->db->query("SELECT idparent from t_category where idcategory='" . $idcategory . "'");
         foreach ($idparent->result() as $value) {
             $dataparent = $this->db->query("SELECT categoryName, idcategory from t_category where idcategory='" . $value->idparent . "'");
@@ -89,7 +96,8 @@ class M_category extends CI_Model {
         }
     }
 
-    function update_category($id, $data) {
+    function update_category($id, $data)
+    {
         $this->db->where('idcategory', $id);
         $this->db->update('t_category', $data);
         echo "<script> $.notify({
@@ -103,7 +111,8 @@ class M_category extends CI_Model {
                 </script>";
     }
 
-    function get_select_category($parent = 0, $hasil) {
+    function get_select_category($parent = 0, $hasil)
+    {
         $parent1 = $this->db->query("SELECT * from t_category where idparent='" . $parent . "'");
         if (($parent1->num_rows()) > 0) {
             foreach ($parent1->result() as $a) {
@@ -146,7 +155,8 @@ class M_category extends CI_Model {
         return $hasil;
     }
 
-    function get_list_category($parent = 0, $hasil) {
+    function get_list_category($parent = 0, $hasil)
+    {
         $parent1 = $this->db->query("SELECT * from t_category where idparent='" . $parent . "'");
         if (($parent1->num_rows()) > 0) {
             foreach ($parent1->result() as $a) {
@@ -209,13 +219,14 @@ class M_category extends CI_Model {
         return $hasil;
     }
 
-    function get_breadcrumb($cat) {
+    function get_breadcrumb($cat)
+    {
         $path = "";
         $base_url = base_url('');
         $div = '<span class="s-text16"><i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i></span>';
         while ($cat != 0) {
             $row = $this->db->query("SELECT * FROM t_category WHERE idcategory='$cat'");
-            $path = $div . '<a class="s-text16" href="'.$base_url.'/pages/product/search?category='.$row->row()->idcategory.'&price=ASC&group=" >' . $row->row()->categoryName . '</a>' . $path;
+            $path = $div . '<a class="s-text16" href="' . $base_url . '/pages/product/search?category=' . $row->row()->idcategory . '&price=ASC&group=" >' . $row->row()->categoryName . '</a>' . $path;
             $cat = $row->row()->idparent;
         }
         if ($path != "") {
@@ -224,7 +235,8 @@ class M_category extends CI_Model {
         return $path;
     }
 
-    function tree_menu_home($parent = 0, $hasil) {
+    function tree_menu_home($parent = 0, $hasil)
+    {
         $base_url = base_url('');
         $w = $this->db->query("SELECT * from t_category where idparent='" . $parent . "'");
         if (($w->num_rows()) > 0) {
@@ -232,7 +244,7 @@ class M_category extends CI_Model {
         }
         foreach ($w->result() as $h) {
 
-            $hasil .= "<li><a href='" .$base_url. "pages/product/search?category=" .$h->idcategory ."&price=ASC"."'>" . $h->categoryName . "</a>";
+            $hasil .= "<li><a href='" . $base_url . "pages/product/search?category=" . $h->idcategory . "&price=ASC" . "'>" . $h->categoryName . "</a>";
             $hasil = $this->tree_menu_home($h->idcategory, $hasil);
             $hasil .= "</li>";
         }
@@ -242,7 +254,8 @@ class M_category extends CI_Model {
         return $hasil;
     }
 
-    function get_category_product($parent = 0, $hasil) {
+    function get_category_product($parent = 0, $hasil)
+    {
         $base_url = base_url('');
         $limit = "6";
         $start = "0";
@@ -253,7 +266,7 @@ class M_category extends CI_Model {
         }
         foreach ($w->result() as $h) {
             $hasil .= '<li>'
-                    . '<a href="JavaScript:void(0);" onclick="url_replace('.$limit.', '.$start.', '.$h->idcategory.', '.$price.')">'.$h->categoryName.'</a>';
+                . '<a href="JavaScript:void(0);" onclick="url_replace(' . $limit . ', ' . $start . ', ' . $h->idcategory . ', ' . $price . ')">' . $h->categoryName . '</a>';
             $hasil = $this->get_category_product($h->idcategory, $hasil);
             $hasil .= "</li>";
         }
@@ -264,14 +277,15 @@ class M_category extends CI_Model {
     }
 
 
-    function tree_menu_mobile($parent = 0, $hasil) {
+    function tree_menu_mobile($parent = 0, $hasil)
+    {
         $base_url = base_url('');
         $w = $this->db->query("SELECT * from t_category where idparent='" . $parent . "'");
         if (($w->num_rows()) > 0) {
             $hasil .= "<ul class='sub-menu'>";
         }
         foreach ($w->result() as $h) {
-            $hasil .= "<li><a href='" .$base_url. "pages/product/search?category=" .$h->idcategory ."&price=ASC"."'>"  . $h->categoryName . "</a>";
+            $hasil .= "<li><a href='" . $base_url . "pages/product/search?category=" . $h->idcategory . "&price=ASC" . "'>"  . $h->categoryName . "</a>";
             $hasil = $this->tree_menu_mobile($h->idcategory, $hasil);
             $hasil .= "</li>";
         }
@@ -282,15 +296,17 @@ class M_category extends CI_Model {
         return $hasil;
     }
 
-    function get_id_parent_by_link($link) {
+    function get_id_parent_by_link($link)
+    {
         $this->db->select('idparent, idcategory')
-                ->where('categoryLink', $link);
+            ->where('categoryLink', $link);
         return $this->db->get('t_category');
     }
-    
-    function get_category_by_parent($idparent){
-         $this->db->select('*')
-                ->where('idparent', $idparent);
+
+    function get_category_by_parent($idparent)
+    {
+        $this->db->select('*')
+            ->where('idparent', $idparent);
         return $this->db->get('t_category');
     }
 }

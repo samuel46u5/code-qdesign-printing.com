@@ -489,9 +489,6 @@
 
     // galery @by agus
 
-
-
-
     function fUploadgalery_Foto() {
         $('#loader').show();
         $.ajax({
@@ -502,8 +499,6 @@
                 $('#loader').hide();
                 $('#progresbar').hide();
                 $('[data-toggle="tooltip"]').tooltip();
-                position();
-                $(".sort").hide();
             }
         });
     }

@@ -25,6 +25,14 @@ class M_galery extends CI_Model
         return $this->db->get();
     }
 
+
+    function simpan_AlbumGalery($data)
+    {
+        $this->db->insert('t_album_galery', $data);
+        $this->db->insert_id();
+    }
+
+
     function data_galery_album_all()
     {
         $this->db->select('*')->from('t_album_galery');

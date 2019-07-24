@@ -1,7 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-class User extends CI_Controller {
-    public function __construct() {
+defined('BASEPATH') or exit('No direct script access allowed');
+class User extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
         if ($this->session->userdata('iduser') == "" && $this->session->userdata('tipeuser') != "1") {
             $this->session->set_flashdata('MSG', 'Login Gagal <br> Anda tidak memiliki akses ke dashboard');
@@ -11,7 +13,8 @@ class User extends CI_Controller {
         $this->load->database();
     }
 
-    function store_user() {
+    function store_user()
+    {
         $email = $this->input->post('email');
         $cekemail = $this->M_user->cek_email($email)->row();
         if ($cekemail != NULL) {
@@ -37,7 +40,8 @@ class User extends CI_Controller {
         }
     }
 
-    function store_user_back() {
+    function store_user_back()
+    {
         $email = $this->input->post('email');
         $cekemail = $this->M_user->cek_email($email)->row();
         if ($cekemail != NULL) {
@@ -79,12 +83,14 @@ class User extends CI_Controller {
         }
     }
 
-    function data_user_all() {
+    function data_user_all()
+    {
         $data['data'] = $this->M_user->data_user_all()->result();
         $this->load->view('dashboard/partner/data_user', $data);
     }
 
-    function update_status_user() {
+    function update_status_user()
+    {
         $id = $this->input->post('id');
         $data = array(
             'userStatus' => $this->input->post('status')
@@ -92,18 +98,21 @@ class User extends CI_Controller {
         $this->M_user->update_user($id, $data);
     }
 
-    function f_input_user() {
+    function f_input_user()
+    {
         $data['partner'] = $this->M_partner->data_partner_all()->result();
         $data['provinsi'] = $this->M_daerah->getProv()->result();
         $this->load->view('dashboard/partner/f_input_user', $data);
     }
 
-    function delete_user() {
+    function delete_user()
+    {
         $id = $this->input->post('id');
         $this->M_user->delete_user($id);
     }
 
-    function update_user() {
+    function update_user()
+    {
         $id = $this->input->post('id');
         $data = array(
             'username' => $this->input->post('username'),
@@ -115,10 +124,10 @@ class User extends CI_Controller {
         $this->M_user->update_user($id, $data);
     }
 
-    function user_by_id() {
+    function user_by_id()
+    {
         $id = $this->input->post('id');
         $data['data'] = $this->M_user->user_by_id($id)->row();
         $this->load->view('dashboard/profile/data_profile', $data);
     }
-
 }

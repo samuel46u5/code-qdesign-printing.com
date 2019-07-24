@@ -13,8 +13,8 @@
                                 <select class="form-control" name="tipeuser" id="tipeuser" required="">
                                     <option disabled="" selected="">pilih Grup Tipe</option>
                                     <option value="1">Admin</option>
-                                    <?php foreach ($partner as $value) {?>
-                                    <option value="<?php echo $value->idpartner;?>"><?php echo $value->partnerName;?> - <?php echo $value->idpartner;?></option>
+                                    <?php foreach ($partner as $value) { ?>
+                                        <option value="<?php echo $value->idpartner; ?>"><?php echo $value->partnerName; ?> - <?php echo $value->idpartner; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -62,16 +62,16 @@
 </div>
 <script>
     function prov() {
-        $('#provinsi').change(function () {
+        $('#provinsi').change(function() {
             $('#kabupaten').after('<i class="fa fa-spinner fa-pulse fa-2x fa-fw loading"></i>');
-            $('#kabupaten').load('<?php echo base_url('Daerah/listKab') ?>/' + $(this).val(), function (responseTxt, statusTxt, xhr)
-            {
+            $('#kabupaten').load('<?php echo base_url('Daerah/listKab') ?>/' + $(this).val(), function(responseTxt, statusTxt, xhr) {
                 if (statusTxt === "success")
                     $('.loading').remove();
             });
             return false;
         });
     }
+
     function storeUser() {
         var valid = $("#userdesc").valid();
         if (valid == true) {
@@ -83,7 +83,7 @@
                 data: new FormData(form),
                 contentType: false,
                 processData: false,
-                success: function (resp) {
+                success: function(resp) {
                     $('#alert').html(resp);
                     $('#loader').hide();
                     dataUser();

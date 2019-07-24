@@ -1,10 +1,12 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Product extends CI_Controller {
+class Product extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         if ($this->session->userdata('iduser') == "" && $this->session->userdata('tipeuser') != "1") {
             $this->session->set_flashdata('MSG', 'Login Gagal <br> Anda tidak memiliki akses ke dashboard');
@@ -16,7 +18,8 @@ class Product extends CI_Controller {
         $this->load->database();
     }
 
-    function f_upload() {
+    function f_upload()
+    {
         $idproduct = $this->M_product->id_product();
         $session = $this->session->userdata('iduser');
         $cektemp = $this->M_product->data_temp_idupload_temp($session, "temp");
@@ -32,7 +35,8 @@ class Product extends CI_Controller {
         $this->load->view('dashboard/product/f_upload_product', $data);
     }
 
-    function do_upload_product() {
+    function do_upload_product()
+    {
         $idProduct = $this->input->post('idproduct');
         $idUpload = $this->input->post('idupload');
         $session = $this->session->userdata('iduser');
@@ -40,11 +44,11 @@ class Product extends CI_Controller {
         $rangestart = $this->input->post('rangestart');
         $rangeend = $this->input->post('rangeend');
         $multilevelprice = $this->input->post('multilevelprice');
-        
+
         $price = $this->input->post('productprice');
-        if(!empty($price)){
+        if (!empty($price)) {
             $price = $price;
-        }else{
+        } else {
             $price = $multilevelprice[0];
         }
         $multilevelprice = $this->input->post('multilevelprice');
@@ -77,7 +81,7 @@ class Product extends CI_Controller {
             );
             $this->M_product->update_product($data, $idProduct);
             if (!empty($multilevelstatus)) {
-                $this->store_multilevel_price($idProduct,$rangestart, $rangeend, $multilevelprice, $unit);
+                $this->store_multilevel_price($idProduct, $rangestart, $rangeend, $multilevelprice, $unit);
             }
             echo '<script>swal({
                 title: "Success!",
@@ -90,41 +94,43 @@ class Product extends CI_Controller {
         }
     }
 
-    function store_multilevel_price($idproduct,$rangestart, $rangeend, $multilevelprice, $unit) {
+    function store_multilevel_price($idproduct, $rangestart, $rangeend, $multilevelprice, $unit)
+    {
         $cek = $this->M_product->multipleprice_by_idproduct($idproduct);
-        if($cek->num_rows() > 0){
+        if ($cek->num_rows() > 0) {
             $this->M_product->delete_multilevelprice_by_id($idproduct);
             for ($i = 0; $i < count($rangestart); $i++) {
-            $start = $rangestart[$i];
-            $end = $rangeend[$i];
-            $price = $multilevelprice[$i];
-            $data = array(
-                'idproduct' => $idproduct,
-                'rangeStart' => str_replace(".", "", $start),
-                'rangeEnd' => str_replace(".", "", $end),
-                'multilevelPrice' => str_replace(".", "", $price),
-                'unit' => $unit
-            );
-            $this->M_product->store_multilevel_price($data);
-        }
-        }else{
+                $start = $rangestart[$i];
+                $end = $rangeend[$i];
+                $price = $multilevelprice[$i];
+                $data = array(
+                    'idproduct' => $idproduct,
+                    'rangeStart' => str_replace(".", "", $start),
+                    'rangeEnd' => str_replace(".", "", $end),
+                    'multilevelPrice' => str_replace(".", "", $price),
+                    'unit' => $unit
+                );
+                $this->M_product->store_multilevel_price($data);
+            }
+        } else {
             for ($i = 0; $i < count($rangestart); $i++) {
-            $start = $rangestart[$i];
-            $end = $rangeend[$i];
-            $price = $multilevelprice[$i];
-            $data = array(
-                'idproduct' => $idproduct,
-                'rangeStart' => str_replace(".", "", $start),
-                'rangeEnd' => str_replace(".", "", $end),
-                'multilevelPrice' => str_replace(".", "", $price),
-                'unit' => $unit
-            );
-            $this->M_product->store_multilevel_price($data);
-        }
+                $start = $rangestart[$i];
+                $end = $rangeend[$i];
+                $price = $multilevelprice[$i];
+                $data = array(
+                    'idproduct' => $idproduct,
+                    'rangeStart' => str_replace(".", "", $start),
+                    'rangeEnd' => str_replace(".", "", $end),
+                    'multilevelPrice' => str_replace(".", "", $price),
+                    'unit' => $unit
+                );
+                $this->M_product->store_multilevel_price($data);
+            }
         }
     }
 
-    function temp_upload_product($idP, $idU, $session) {
+    function temp_upload_product($idP, $idU, $session)
+    {
         $data = array(
             'idproduct' => $idP,
             'idcategory' => "NULL",
@@ -148,7 +154,8 @@ class Product extends CI_Controller {
         }
     }
 
-    function do_upload_photo() {
+    function do_upload_photo()
+    {
         $idP = $this->input->post('idproduct');
         $a = $this->input->post('idupload');
         $session = $this->session->userdata('iduser');
@@ -184,7 +191,8 @@ class Product extends CI_Controller {
         }
     }
 
-    function _create_thumbs($file_name) {
+    function _create_thumbs($file_name)
+    {
         // Image resizing config
         $config = array(
             // Large Image
@@ -205,7 +213,8 @@ class Product extends CI_Controller {
                 'width' => 80,
                 'height' => 67,
                 'new_image' => './asset/img/uploads/product/thumb/' . "thmb_" . $file_name
-        ));
+            )
+        );
         $this->load->library('image_lib', $config[0]);
         foreach ($config as $item) {
             $this->image_lib->initialize($item);
@@ -216,7 +225,8 @@ class Product extends CI_Controller {
         }
     }
 
-    function load_photo($idU) {
+    function load_photo($idU)
+    {
         $gambar = $this->M_product->load_photo($idU)->result();
         foreach ($gambar as $value) {
             $id = "'$value->idFoto'";
@@ -224,25 +234,28 @@ class Product extends CI_Controller {
             echo ' <div class="col-md-6 border-grey">
         <img class="img-responsive" src="' . site_url('asset/img/uploads/product/' . $value->fotoName . '') . '" />
         <span class="col-md-4 btn btn-sm bg-border-blue border-grey" style="display: block; color: #dd4b39; margin-top:7px;" onClick="del(' . $id . ')"><i class="fa fa-trash"></i> Hapus</span>'
-            . '<span class="label label-success">' . $status . '</span> 
+                . '<span class="label label-success">' . $status . '</span> 
     </div>
     <div class="clearfix visible-xs"></div>';
         }
     }
 
-    function imgDel($id) {
+    function imgDel($id)
+    {
         $gambar = $this->M_product->foto_by_id($id)->row();
         unlink("asset/img/uploads/product/" . $gambar->fotoName);
         unlink("asset/img/uploads/product/thumb/" . $gambar->thumbImage);
         $this->M_product->do_delete_foto($id);
     }
 
-    function data_product() {
+    function data_product()
+    {
         $data['data'] = $this->M_product->data_product()->result();
         $this->load->view('dashboard/product/data_product', $data);
     }
 
-    function update_stock() {
+    function update_stock()
+    {
         $id = $this->input->post('id');
         $stock = $this->input->post('stock');
         if ($stock == 0) {
@@ -267,7 +280,8 @@ class Product extends CI_Controller {
                     </script>";
     }
 
-    function delete_product() {
+    function delete_product()
+    {
         $idproduct = $this->input->post('idproduct');
         $idupload = $this->input->post('idupload');
         $this->M_product->delete_by_idproduct($idproduct);
@@ -279,17 +293,18 @@ class Product extends CI_Controller {
         }
     }
 
-    function f_update_product() {
+    function f_update_product()
+    {
         $data['data'] = $this->M_product->product_by_id_all($this->input->post('id'))->row();
         $data['category'] = $this->M_category->get_select_category(0, "");
         $data['datamultilevel'] = $this->M_product->data_multilevel_by_id($this->input->post('id'))->result();
         $this->load->view('dashboard/product/f_update_product', $data);
     }
 
-    function cek_qty() {
+    function cek_qty()
+    {
         $id = $this->input->post('id');
         $product = $this->M_product->product_by_id($id)->row();
         echo $product->quantityStock;
     }
-
 }

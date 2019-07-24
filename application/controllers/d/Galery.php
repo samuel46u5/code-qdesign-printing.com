@@ -13,10 +13,29 @@ class Galery extends CI_Controller
         $this->load->database();
     }
 
-    function add_galeryfoto()
+
+    public function list_album()
+    {
+        $album = $this->M_galery->data_galery_album_all()->result();
+        echo "<option disabled selected>Pilih Kelurahan</option>";
+        foreach ($album as $a) {
+            echo "<option value='{$a->nama_album}'>{ $a->nama_album}</option>";
+        }
+    }
+
+    function get_album_list()
+    {
+        $data['data'] = $this->M_galery->data_galery_album_all()->result();
+        return $data->result(); //mengembalikan hasil ke pemanggil
+    }
+
+    function do_upload_album()
     {
 
-        $this->load->view('dashboard/galery/f_upload_galery_foto');
+        $data = array(
+            'nama_album' => $this->input->post('nama_album')
+        );
+        $this->M_galery->simpan_AlbumGalery($data);
     }
 
     function do_upload_galery()
@@ -52,7 +71,8 @@ class Galery extends CI_Controller
                     // 'sortOrder' => $this->input->post('sortorder'),
                     // 'bannerLink' => $linkbanner
 
-                    // disiini diisi sesuai nama filed 
+                    // disiini diisi sesuai nama filed
+                    'id_album' => $this->input->post('album'),
                     'image' => $c['file_name'],
                     'deskripsi' => $this->input->post('bannertext')
 
@@ -76,15 +96,19 @@ class Galery extends CI_Controller
         }
     }
 
+    function add_galeryfoto() //meng
+    {
+
+        $data['data'] = $this->M_galery->data_galery_album_all()->result();
+        $this->load->view('dashboard/galery/f_upload_galery_foto', $data);
+        // $this->load->view('dashboard/galery/f_upload_galery_foto');
+    }
+
+
     function dataGaleryFoto()
     {
 
-        $data['galery'] = $this->M_galery->data_galery_foto_all()->result();
-        $data['album'] = $this->M_galery->data_galery_album_all()->result();
-
-        var_dump($data['album']);
-        die;
-
+        $data['data'] = $this->M_galery->data_galery_foto_all()->result();
         $this->load->view('dashboard/galery/data_galery_foto', $data);
     }
 

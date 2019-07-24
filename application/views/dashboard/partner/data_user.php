@@ -67,7 +67,7 @@
                                                         <button class="btn-block" title="delete" onclick="deleteUser('<?php echo $value->iduser; ?>');"><i class="fa fa-trash"></i> Hapus</button>
                                                     </li>
                                                     <li>
-                                                        <button class="btn-block" title="chat wa" onclick="chatViaWA('<?php echo "62".substr($value->userHp,1); ?>','<?php echo $value->username; ?>')"><i class="fa fa-whatsapp"></i> Chat Via WA</button>
+                                                        <button class="btn-block" title="chat wa" onclick="chatViaWA('<?php echo "62" . substr($value->userHp, 1); ?>','<?php echo $value->username; ?>')"><i class="fa fa-whatsapp"></i> Chat Via WA</button>
                                                     </li>
                                                     <li>
                                                         <button class="btn-block" title="Kirim Email" onclick="sendEmail('<?php echo $value->iduser; ?>')"><i class="fa fa-envelope"></i> Kirim Email</button>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-        </div>      
+        </div>
     </div>
 </div>
 <script>
@@ -91,8 +91,11 @@
         $.ajax({
             url: "<?php echo base_url('d/User/update_status_user'); ?>",
             method: "POST",
-            data: {"id": id, "status": status},
-            success: function (data) {
+            data: {
+                "id": id,
+                "status": status
+            },
+            success: function(data) {
                 $('#alert').html(data);
                 dataUser();
             }
@@ -103,7 +106,7 @@
         $.ajax({
             url: "<?php echo base_url('d/User/f_input_user'); ?>",
             method: "POST",
-            success: function (data) {
+            success: function(data) {
                 $('#finputuser').html(data);
                 prov();
             }
@@ -112,44 +115,48 @@
 
     function deleteUser(id) {
         swal({
-            title: "Hapus Item ini ?",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Hapus",
-            cancelButtonText: "Batal",
-            closeOnConfirm: false,
-            closeOnCancel: false
-        },
-                function (isConfirm) {
-                    if (isConfirm) {
-                        $.ajax({
-                            url: "<?php echo base_url('d/User/delete_user'); ?>",
-                            method: "POST",
-                            data: {"id": id},
-                            success: function (data) {
-                                $('#alert').html(data);
-                                dataUser();
-                            }
-                        });
-                        swal("Terhapus!", "Item Terhapus", "success");
-                    } else {
-                        swal("", "", "error");
-                    }
-                });
+                title: "Hapus Item ini ?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Hapus",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        url: "<?php echo base_url('d/User/delete_user'); ?>",
+                        method: "POST",
+                        data: {
+                            "id": id
+                        },
+                        success: function(data) {
+                            $('#alert').html(data);
+                            dataUser();
+                        }
+                    });
+                    swal("Terhapus!", "Item Terhapus", "success");
+                } else {
+                    swal("", "", "error");
+                }
+            });
     }
-    
-    function chatViaWA(phone, username){
-    window.open('https://web.whatsapp.com/send?phone='+phone+'&text=Halo '+username+'', '_blank');
+
+    function chatViaWA(phone, username) {
+        window.open('https://web.whatsapp.com/send?phone=' + phone + '&text=Halo ' + username + '', '_blank');
     }
-    
-    function sendEmail(id){
-         $('#loader').show();
+
+    function sendEmail(id) {
+        $('#loader').show();
         $.ajax({
             url: '<?php echo base_url('d/Crm/compose_email_by_iduser') ?>',
             method: "POST",
-            data: {"id": id},
-            success: function (data) {
+            data: {
+                "id": id
+            },
+            success: function(data) {
                 $('#data').html(data);
                 $('#loader').hide();
                 $(".textarea").wysihtml5();

@@ -13,8 +13,10 @@
                                 <thead>
                                     <tr>
                                         <th>Cover</th>
-                                        <th>Nama Foto</th>
+
                                         <th>Deskripsi</th>
+                                        <th>Album</th>
+                                        <th>Aksi</th>
                                         <!-- <th>Status</th>
                                         <th>Upload By</th>
                                         <th>Link Produk</th>
@@ -25,12 +27,10 @@
                                     <?php foreach ($data as $value) { ?>
                                         <tr class="">
                                             <td><img src="<?php echo site_url('asset/img/uploads/galery/') . $value->image; ?>" style="max-width: 180px;"></td>
-                                            <!-- <td><?php echo $value->idphoto; ?></td> -->
                                             <td><?php echo $value->deskripsi; ?></td>
-                                            <!-- <td><?php echo $value->aktif; ?></td>
-                                                            <td><?php echo $value->idupload; ?></td>
-                                                            <td><?php echo $value->link_produk; ?></td>
-                                                            <td><?php echo $value->idphoto; ?></td> -->
+
+                                            <td><?php echo $value->nama_album; ?></td>
+
                                             <td>
                                                 action
                                             </td>

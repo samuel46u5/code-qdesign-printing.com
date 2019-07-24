@@ -8,6 +8,7 @@
                     <div class="panel-heading">
                         Unggah Foto Galery
                     </div>
+
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12" id="formfoto">
@@ -15,38 +16,23 @@
                                     <div class="panel-body">
                                         <div class="col-lg-12">
                                             <form role="form" class="form-horizontal" method="POST" enctype="multipart/form-data" id="forminputgalery" action="">
-
-
-                                                <!-- <div class="form-group">
-                                                    <label for="link" class="col-sm-2 control-label">Link Foto <span class="text-info" data-toggle="tooltip" title="Pilih Link untuk mengarahkan banner ke produk yang relevan"><i class="fa fa-question-circle fa-fw"></i></span></label>
-                                                    <div class="col-sm-10">
-                                                        <select class="form-control required" title="input this field" name="link" id="link">
-                                                            <option selected="" disabled="" value="">Pilih Link produk</option>
-                                                            <option value="<?php echo base_url(); ?>">Logo Toko</option>
-                                                            <option value="null">Banner Title Page</option>
-                                                            <?php echo $category; ?>
-                                                        </select>
-                                                    </div>
-                                                </div> -->
                                                 <div class="form-group">
-                                                    <label for="link" class="col-sm-2 control-label">Album <span class="text-info" data-toggle="tooltip" title="Pilih Link untuk mengarahkan banner ke produk yang relevan"><i class="fa fa-question-circle fa-fw"></i></span></label>
-
+                                                    <label for="link" class="col-sm-2 control-label">Album <span class="text-info" data-toggle="tooltip" title="Tentukan nama album untuk galery"><i class="fa fa-question-circle fa-fw"></i></span></label>
                                                     <div class="col-sm-9">
-                                                        <select class="form-control required" title="input this field" name="link" id="link">
-                                                            <option selected="" disabled="" value="">Pilih album galery</option>
-                                                            <?php foreach ($album as $value) { ?>
-                                                                <option selected="" disabled="" value=""><?php echo $value->nama_album; ?></option>
-                                                                <!--  -->
+                                                        <select class="form-control" name="album" id="album" required="">
+                                                            <option disabled="" selected="">Pilih album galery</option>
+                                                            <?php foreach ($data as $value) { ?>
+                                                                <option id="<?php echo $value->id ?>" value="<?php echo $value->id ?>" data-nama_album="<?php echo $value->nama_album; ?>"> <?php echo $value->nama_album; ?> </option>
                                                             <?php } ?>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-1">
                                                         <!-- <input type="button" onclick="doTambahAlbum();" class="btn-submit btn btn-success pull-right" value="Album Galery"> -->
-                                                        <button type="button" class="btn-submit btn btn-success pull-right" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Album Galery</button>
+                                                        <button type="button" class="btn-submit btn btn-success pull-right" data-toggle="modal" data-target="#albumModal">Album Galery</button>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="bannertext" class="col-sm-2 control-label">Galery Text <span class="text-info" data-toggle="tooltip" title="Pilih Link untuk mengarahkan banner ke produk yang relevan"><i class="fa fa-question-circle fa-fw"></i></span></label>
+                                                    <label for="bannertext" class="col-sm-2 control-label">Galery Text <span class="text-info" data-toggle="tooltip" albumle="Pilih album untuk mengarahkan banner ke produk yang relevan"><i class="fa fa-question-circle fa-fw"></i></span></label>
                                                     <div class="col-sm-10">
                                                         <textarea class="form-control" name="bannertext" id="bannertext" row="7" maxlength="50" placeholder="maksimal 50 karakter"></textarea>
                                                     </div>
@@ -79,7 +65,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade" id="albumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -87,27 +73,50 @@
                 <h4 class="modal-title" id="exampleModalLabel">Album Galery</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form role="form" class="" method="POST" id="forminputalbum" action="">
                     <div class="form-group">
                         <label for="nama-album" class="control-label">Nama Album</label>
-                        <input type="text" class="form-control" id="nama-album">
+                        <input class="form-control" name="nama_album" id="nama_album" type="text" required="">
                     </div>
 
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Simpan</button>
+                <input type="button" onclick="doTambahAlbum();" class="btn-submit btn btn-success pull-right" value="Simpan">
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('#menu a').click(function() {
+            var url = $(this).attr('href');
+            $('#container').load(url);
+            return false;
+        });
+    });
+
     function doTambahAlbum() {
-        $('#exampleModal').on('shown.bs.modal', function() {
-            $('#myInput').focus()
-        })
+        var valid = $("#forminputalbum").valid();
+        if (valid == true) {
+            var form = $('#forminputalbum').get(0);
+            $('#loader').show();
+            $.ajax({
+                url: '<?php echo base_url('d/Galery/do_upload_album') ?>',
+                method: "POST",
+                data: new FormData(form),
+                contentType: false,
+                processData: false,
+                success: function(resp) {
+                    $('#alert').html(resp); //menampilkan alert
+                    $('#loader').hide(); //menyembunyikan loader
+                    $('#albumModal').modal('hide'); //menutup modal
+                    //update isi album
+                }
+            });
+        }
     }
 
     function doUploadfotoGalery() {
