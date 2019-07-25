@@ -31,7 +31,7 @@
                                                 </div>
                                                 <div class="sort form-group">
                                                     <label for="link" class="col-sm-2 control-label">Urutkan Posisi Banner</label>
-                                                    <div class="col-sm-10">                        
+                                                    <div class="col-sm-10">
                                                         <select class="form-control" name="sortorder" id="sortorder" required="">
                                                         </select>
                                                     </div>
@@ -82,15 +82,14 @@
 </div>
 <script type="text/javascript">
     function position() {
-        $('#bannerposition').change(function () {
+        $('#bannerposition').change(function() {
             var pos = $("#bannerposition").val();
             if (pos == "logo" || pos == "icontitle") {
                 $(".sort").hide();
             } else {
                 $(".sort").show();
                 $('#sortorder').after('<i class="fa fa-spinner fa-pulse fa-2x fa-fw loading"></i>');
-                $('#sortorder').load('<?php echo base_url('/d/Design/sort_order_banner') ?>/' + $(this).val(), function (responseTxt, statusTxt, xhr)
-                {
+                $('#sortorder').load('<?php echo base_url('/d/Design/sort_order_banner') ?>/' + $(this).val(), function(responseTxt, statusTxt, xhr) {
                     if (statusTxt === "success")
                         $('.loading').remove();
                 });
@@ -98,6 +97,7 @@
             }
         });
     }
+
     function doUploadfotoBanner() {
         var valid = $("#forminputbanner").valid();
         if (valid == true) {
@@ -112,20 +112,20 @@
                 data: new FormData(form),
                 contentType: false,
                 processData: false,
-                success: function (html) {
+                success: function(html) {
                     $('.progress-bar').width('0%');
                     $('#alert').html(html);
                     $('#proses').hide();
                 },
-                complete: function () {
+                complete: function() {
                     submit.attr('disabled', false);
                     $('#alert').html();
                     $('#progresbar').hide();
                     //document.getElementById("forminputbanner").reset();
                 },
-                xhr: function () {
+                xhr: function() {
                     var xhr = $.ajaxSettings.xhr();
-                    xhr.upload.onprogress = function (e) {
+                    xhr.upload.onprogress = function(e) {
                         var onprogress = Math.floor(e.loaded / e.total * 100) + '%';
                         $('.progress-bar').width(onprogress);
                     };

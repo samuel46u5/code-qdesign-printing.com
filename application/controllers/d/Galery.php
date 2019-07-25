@@ -38,6 +38,15 @@ class Galery extends CI_Controller
         $this->M_galery->simpan_AlbumGalery($data);
     }
 
+    function update_album()
+    {
+        $id = $this->input->post('id_album');
+        $data = array(
+            'nama_album' => $this->input->post('nama_album_baru')
+        );
+        $this->M_galery->update_galery($id, $data);
+    }
+
     function do_upload_galery()
     {
         $url = base_url('');

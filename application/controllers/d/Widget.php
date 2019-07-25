@@ -1,7 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-class Widget extends CI_Controller {
-    public function __construct() {
+defined('BASEPATH') or exit('No direct script access allowed');
+class Widget extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
         if ($this->session->userdata('iduser') == "" && $this->session->userdata('tipeuser') != "1") {
             $this->session->set_flashdata('MSG', 'Login Gagal <br> Anda tidak memiliki akses ke dashboard');
@@ -12,7 +14,8 @@ class Widget extends CI_Controller {
         $this->load->database();
     }
 
-    function data_widget_by_name() {
+    function data_widget_by_name()
+    {
         $name = $this->input->post('name');
         $data['data'] = $this->M_widget->data_widget_by_name($name)->result();
         if ($name == "Chat Button") {
@@ -21,12 +24,13 @@ class Widget extends CI_Controller {
             $this->load->view('dashboard/widget/data_share_button', $data);
         } elseif ($name == "Facebook Comment") {
             $this->load->view('dashboard/widget/data_facebook_comment', $data);
-        }elseif ($name == "Order Via WhatsApp") {
+        } elseif ($name == "Order Via WhatsApp") {
             $this->load->view('dashboard/widget/data_order_via_wa', $data);
         }
     }
 
-    function update_widget() {
+    function update_widget()
+    {
         $id = $this->input->post('id');
         $data = array(
             'widgetStatus' => $this->input->post('status'),
@@ -36,5 +40,4 @@ class Widget extends CI_Controller {
         );
         $this->M_widget->update_data_widget($id, $data);
     }
-
 }
