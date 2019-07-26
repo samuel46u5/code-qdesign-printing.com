@@ -31,7 +31,7 @@
                                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" title="tambah album" data-target="#albumModal"><i class="fa fa-plus-square"></i></button>
                                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="update album" id="refresh-album" onclick=""><i class="fa fa-refresh"></i></button>
                                                         <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" title="update album" data-target="#editAlbumModal" id="edit-album"><i class="fa fa-pencil"></i></button>
-                                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="hapus album" id="hapus-album"><i class="fa fa-trash"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger" title="hapus album" id="hapus-album" data-target="#HapusAlbumModal" onclick="doHapusAlbum()"><i class="fa fa-trash"></i></button>
 
 
                                                     </div>
@@ -125,13 +125,13 @@
     </div>
 </div>
 
+
 <script type="text/javascript">
     $(document).ready(function() {
         //disabled button ketika halaman baru dibuka
         $("#edit-album").attr("disabled", "disabled");
         $("#refresh-album").attr("disabled", "disabled");
         $("#hapus-album").attr("disabled", "disabled");
-
     });
 
 
@@ -153,10 +153,44 @@
             success: function(data) {
                 $('#loader').hide();
                 $('#editAlbumModal').modal('hide');
-                alert('sukses');
+                alert('sukses update');
             }
         });
     }
+
+    function doHapusAlbum() {
+        var id = $("#album :selected").val();
+        var nama_album = $("#album :selected").text();
+        swal({
+                title: "Hapus Album" + nama_album + "?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Hapus",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        url: "<?php echo base_url('d/Galery/hapus_album'); ?>",
+                        method: "POST",
+                        data: {
+                            "id": id
+                        },
+                        success: function(data) {
+                            $('#alert').html(data);
+                            // dataBanner();
+                        }
+                    });
+                    swal("Terhapus!", "Album" + nama_album + "Terhapus", "success");
+                } else {
+                    swal("Cancel", "Batal hapus", "error");
+                }
+            });
+    }
+
 
 
 
@@ -173,6 +207,9 @@
 
         // alert($("#album :selected").text());
         // alert($("#album :selected").val());
+
+        $("#qb #id_album_hapus").val($("#album :selected").val());
+        $("#qb #nama_album_hapus").val($("#album :selected").text());
 
         $("#qq #id_album").val($("#album :selected").val());
         $("#qq #nama_album_lama").val($("#album :selected").text());

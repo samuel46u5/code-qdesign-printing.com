@@ -1,7 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-class Design extends CI_Controller {
-    public function __construct() {
+defined('BASEPATH') or exit('No direct script access allowed');
+class Design extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
         if ($this->session->userdata('iduser') == "" && $this->session->userdata('tipeuser') != "1") {
             $this->session->set_flashdata('MSG', 'Login Gagal <br> Anda tidak memiliki akses ke dashboard');
@@ -13,18 +15,21 @@ class Design extends CI_Controller {
         $this->load->database();
     }
 
-    function f_banner_home() {
+    function f_banner_home()
+    {
         $data['category'] = $this->M_category->get_select_category(0, "");
         $this->load->view('dashboard/design/f_banner', $data);
     }
 
-    function data_banner_all() {
+    function data_banner_all()
+    {
         $data['category'] = $this->M_category->get_select_category(0, "");
         $data['data'] = $this->M_design->data_banner_all()->result();
         $this->load->view('dashboard/design/data_banner_all', $data);
     }
 
-    function sort_order_banner($position) {
+    function sort_order_banner($position)
+    {
         if ($position == "bannerhome") {
             echo '<option selected="" disabled="" value="">Sort Order (urutan)</option>
                 <option value="1">ke -1</option>
@@ -45,7 +50,8 @@ class Design extends CI_Controller {
         }
     }
 
-    function do_upload_banner() {
+    function do_upload_banner()
+    {
         $url = base_url('');
         $bannerpos = $this->input->post('bannerposition');
         $link = $this->input->post('link');
@@ -59,7 +65,7 @@ class Design extends CI_Controller {
             $desc = "Gambar ini digunakan untuk logo di semua posisi, sesuaikan ukuran yang telah ditetapkan";
         } elseif ($bannerpos == "bannertitlepage") {
             $desc = "Gambar ini digunakan untuk title page";
-        }elseif ($bannerpos == "icontitle"){
+        } elseif ($bannerpos == "icontitle") {
             $desc = "iconpage";
         }
         if ($link == $url) {
@@ -119,7 +125,8 @@ class Design extends CI_Controller {
         }
     }
 
-    function update_status_banner() {
+    function update_status_banner()
+    {
         $id = $this->input->post('id');
         $url = base_url('');
         $bannerpos = $this->input->post('position');
@@ -174,14 +181,16 @@ class Design extends CI_Controller {
         $this->M_design->update_status_banner($id, $data);
     }
 
-    function delete_banner() {
+    function delete_banner()
+    {
         $id = $this->input->post('id');
         $gambar = $this->M_design->banner_by_id($id)->row();
         unlink("asset/img/uploads/banner/" . $gambar->image);
         $this->M_design->delete_banner($id);
     }
 
-    function delete_popup() {
+    function delete_popup()
+    {
         $id = $this->input->post('id');
         $type = $this->input->post('type');
         if (($type == "Image Only") || ($type == "Header Image And Bottom Text")) {
@@ -191,16 +200,19 @@ class Design extends CI_Controller {
         $this->M_design->delete_popup($id);
     }
 
-    function data_popup() {
+    function data_popup()
+    {
         $data['data'] = $this->M_design->data_pop_up()->result();
         $this->load->view('dashboard/design/data_popup', $data);
     }
 
-    function f_upload_popup() {
+    function f_upload_popup()
+    {
         $this->load->view('dashboard/design/f_upload_popup');
     }
 
-    function do_upload_popup() {
+    function do_upload_popup()
+    {
         $type = $this->input->post('tipepopup');
         $text = $this->input->post('popuptext');
         $button = $this->input->post('statusbutton');
@@ -217,7 +229,8 @@ class Design extends CI_Controller {
         }
     }
 
-    function do_upload_popup_text($type, $text, $typedesc, $button) {
+    function do_upload_popup_text($type, $text, $typedesc, $button)
+    {
         $data = array(
             'popupType' => $type,
             'popupText' => $text,
@@ -228,7 +241,8 @@ class Design extends CI_Controller {
         $this->M_design->store_popup($data);
     }
 
-    function do_upload_popup_image($type, $file, $typedesc, $button) {
+    function do_upload_popup_image($type, $file, $typedesc, $button)
+    {
         $config['upload_path'] = './asset/img/uploads/popup/';
         $nmfile = "ft_" . $type . " ";
         $config['allowed_types'] = "*";
@@ -265,7 +279,8 @@ class Design extends CI_Controller {
         }
     }
 
-    function do_upload_popup_text_image($type, $file, $text, $typedesc, $button) {
+    function do_upload_popup_text_image($type, $file, $text, $typedesc, $button)
+    {
         $config['upload_path'] = './asset/img/uploads/popup/';
         $nmfile = "ft_" . $type . " ";
         $config['allowed_types'] = "*";
@@ -303,7 +318,8 @@ class Design extends CI_Controller {
         }
     }
 
-    function update_status_popup() {
+    function update_status_popup()
+    {
         $id = $this->input->post('id');
         $status = $this->input->post('status');
         if ($status == "Active") {
@@ -333,18 +349,21 @@ class Design extends CI_Controller {
         }
     }
 
-    function preview_popup() {
+    function preview_popup()
+    {
         $id = $this->input->post('id');
         $data['datapopup'] = $this->M_design->data_popup_by_id($id)->row();
         $this->load->view('dashboard/design/preview_popup', $data);
     }
 
-    function data_footer_tagline() {
+    function data_footer_tagline()
+    {
         $data['data'] = $this->M_design->data_footer_tagline()->result();
         $this->load->view('dashboard/design/data_footer_tagline', $data);
     }
 
-    function store_footer_tagline() {
+    function store_footer_tagline()
+    {
         $cek = $this->M_design->count_footer_tagline()->row();
         if ($cek->id > 2) {
             echo "<script> $.notify({
@@ -364,13 +383,14 @@ class Design extends CI_Controller {
         }
     }
 
-    function f_store_footer_tagline() {
+    function f_store_footer_tagline()
+    {
         $this->load->view('dashboard/design/f_upload_footer_tagline');
     }
 
-    function delete_footer_tagline() {
+    function delete_footer_tagline()
+    {
         $id = $this->input->post('id');
         $this->M_design->delete_footer_tagline($id);
     }
-
 }

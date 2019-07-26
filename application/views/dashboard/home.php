@@ -308,7 +308,8 @@
         </nav>
         <div id="page-wrapper">
             <div class="container-fluid">
-                <div id="alert"></div>
+                <!-- ini untuk menampilkan alert -->
+                <div id="alert"></div> 
                 <div id="data"></div>
                 <?php echo $this->session->flashdata('message'); ?>
             </div>

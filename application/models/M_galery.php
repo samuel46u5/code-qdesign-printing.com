@@ -30,6 +30,15 @@ class M_galery extends CI_Model
 
         $this->db->where('id', $id);
         $this->db->update('t_album_galery', $data);
+        echo "<script> $.notify({
+            title: '<strong>Sukses</strong>',
+            message: 'Kategori " . $id . "  Terupdate'
+                }, {type: 'success',
+                animate: {enter: 'animated fadeInUp',exit: 'animated fadeOutRight'
+                },placement: {from: 'top',align: 'right'
+                },offset: 20,delay: 3000,timer: 500,spacing: 10, z_index: 1031,
+                });
+                </script>";
     }
 
     function simpan_AlbumGalery($data)
@@ -38,11 +47,42 @@ class M_galery extends CI_Model
         $this->db->insert_id();
     }
 
+    function delete_galery($idphoto)
+    {
+        $this->db->where('idphoto', $idphoto);
+        $this->db->delete('t_galery_foto');
+    }
 
     function data_galery_album_all()
     {
         $this->db->select('*')->from('t_album_galery');
         return $this->db->get();
+    }
+
+    function update_status_galery($idphoto, $data)
+    {
+        $this->db->where('idphoto', $idphoto);
+        $this->db->update('t_galery_foto', $data);
+
+        echo "<script> $.notify({
+            title: '<strong>Sukses</strong>',
+            message: 'Galery " . $data['deskripsi'] . "  Terupdate'
+                }, {
+                type: 'success',
+                animate: {enter: 'animated fadeInUp',exit: 'animated fadeOutRight'
+                },placement: {from: 'top',align: 'right'
+                },offset: 20,delay: 3000,timer: 500,spacing: 10,z_index: 1031,
+                });
+                </script>";
+    }
+
+
+    function foto_by_id($id)
+    {
+
+        $this->db->select("*")
+            ->where('idphoto', $id);
+        return $this->db->get('t_galery_foto');
     }
 
     function id_galery()

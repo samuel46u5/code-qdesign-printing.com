@@ -47,6 +47,12 @@ class Galery extends CI_Controller
         $this->M_galery->update_galery($id, $data);
     }
 
+    function hapus_album()
+    {
+        $id = $this->input->post('id');
+        $this->M_galery->delete_galery($id);
+    }
+
     function do_upload_galery()
     {
         $url = base_url('');
@@ -95,7 +101,7 @@ class Galery extends CI_Controller
                     type: "success",
                     showConfirmButton: true
                     }, function(){
-                    dataBanner();
+                    dataGaleryFoto();
                     });</script>';
             } else {
                 echo $this->image_lib->display_errors();
@@ -105,7 +111,7 @@ class Galery extends CI_Controller
         }
     }
 
-    function add_galeryfoto() //meng
+    function add_galeryfoto() //menambah galery foto
     {
 
         $data['data'] = $this->M_galery->data_galery_album_all()->result();
@@ -113,12 +119,31 @@ class Galery extends CI_Controller
         // $this->load->view('dashboard/galery/f_upload_galery_foto');
     }
 
+    function delete_galery() //hapus galery foto
+    {
+        $idphoto = $this->input->post('idphoto');
+
+        $gambar = $this->M_galery->foto_by_id($idphoto)->row();
+        unlink("asset/img/uploads/galery/" . $gambar->image);
+        $this->M_galery->delete_galery($idphoto);
+    }
 
     function dataGaleryFoto()
     {
-
-        $data['data'] = $this->M_galery->data_galery_foto_all()->result();
+        $data['album'] = $this->M_galery->data_galery_album_all()->result(); //pangil data album
+        $data['data'] = $this->M_galery->data_galery_foto_all()->result(); //pangil data galery
         $this->load->view('dashboard/galery/data_galery_foto', $data);
+    }
+
+    function update_status_galery()
+    {
+        $idphoto = $this->input->post('idphoto');
+        $data = array(
+            'deskripsi' => $this->input->post('deskripsi'),
+            'status' => $this->input->post('status'),
+            'id_album' => $this->input->post('id_album')
+        );
+        $this->M_galery->update_status_galery($idphoto, $data);
     }
 
     function dataGaleryVideo()
@@ -126,6 +151,9 @@ class Galery extends CI_Controller
 
         // $data['data'] = $this->M_contact->data_contact()->result();
         $data['aku'] = 'agus';
-        $this->load->view('dashboard/galery/data_galery_video', $data);
+        $this->load->view(
+            'dashboard/galery/data_galery_video',
+            $data
+        );
     }
 }

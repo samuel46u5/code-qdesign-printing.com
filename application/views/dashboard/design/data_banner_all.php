@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-        </div>      
+        </div>
     </div>
 </div>
 <div id="finputmember"></div>
@@ -87,8 +87,15 @@
         $.ajax({
             url: "<?php echo base_url('d/Design/update_status_banner'); ?>",
             method: "POST",
-            data: {"id": id, "status": status, "position": position, "link": link, "sortorder": sort, "bannertext": text},
-            success: function (data) {
+            data: {
+                "id": id,
+                "status": status,
+                "position": position,
+                "link": link,
+                "sortorder": sort,
+                "bannertext": text
+            },
+            success: function(data) {
                 $('#alert').html(data);
                 dataBanner();
             }
@@ -97,30 +104,32 @@
 
     function deleteBanner(id) {
         swal({
-            title: "Hapus Banner ini ?",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Hapus",
-            cancelButtonText: "Batal",
-            closeOnConfirm: false,
-            closeOnCancel: false
-        },
-                function (isConfirm) {
-                    if (isConfirm) {
-                        $.ajax({
-                            url: "<?php echo base_url('d/Design/delete_banner'); ?>",
-                            method: "POST",
-                            data: {"id": id},
-                            success: function (data) {
-                                $('#alert').html(data);
-                                dataBanner();
-                            }
-                        });
-                        swal("Terhapus!", "Image Terhapus", "success");
-                    } else {
-                        swal("", "", "error");
-                    }
-                });
+                title: "Hapus Banner ini ?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Hapus",
+                cancelButtonText: "Batal",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        url: "<?php echo base_url('d/Design/delete_banner'); ?>",
+                        method: "POST",
+                        data: {
+                            "id": id
+                        },
+                        success: function(data) {
+                            $('#alert').html(data);
+                            dataBanner();
+                        }
+                    });
+                    swal("Terhapus!", "Image Terhapus", "success");
+                } else {
+                    swal("", "", "error");
+                }
+            });
     }
 </script>
