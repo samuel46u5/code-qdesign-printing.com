@@ -259,6 +259,10 @@
                             <a href="#"><i class="fa fa-terminal fa-fw"></i> Widget<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
+                                    <a href="JavaScript:void(0);" onclick="dataWidget('Tawk.to');"><i class="fa fa-angle-double-right fa-fw"></i> Tawk.to</a>
+                                </li>
+
+                                <li>
                                     <a href="JavaScript:void(0);" onclick="dataWidget('Chat Button');"><i class="fa fa-angle-double-right fa-fw"></i> Chat Button</a>
                                 </li>
                                 <li>
@@ -309,7 +313,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <!-- ini untuk menampilkan alert -->
-                <div id="alert"></div> 
+                <div id="alert"></div>
                 <div id="data"></div>
                 <?php echo $this->session->flashdata('message'); ?>
             </div>

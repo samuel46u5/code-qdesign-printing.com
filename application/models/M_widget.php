@@ -1,24 +1,29 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-class M_widget extends CI_Model {
-    function __construct() {
+defined('BASEPATH') or exit('No direct script access allowed');
+class M_widget extends CI_Model
+{
+    function __construct()
+    {
         parent::__construct();
     }
-    function data_widget_by_name($name) {
+    function data_widget_by_name($name)
+    {
         $this->db->select('*')
-                ->from('t_widget')
-                ->where('widgetName', $name);
+            ->from('t_widget')
+            ->where('widgetName', $name);
         return $this->db->get();
     }
-    
-    function data_widget_by_id($id) {
+
+    function data_widget_by_id($id)
+    {
         $this->db->select('*')
-                ->from('t_widget')
-                ->where('id', $id);
+            ->from('t_widget')
+            ->where('id', $id);
         return $this->db->get();
     }
-    
-    function update_data_widget($id, $data) {
+
+    function update_data_widget($id, $data)
+    {
         $this->db->where('id', $id);
         $this->db->update('t_widget', $data);
         echo "<script> $.notify({
@@ -32,12 +37,13 @@ class M_widget extends CI_Model {
                 });
                 </script>";
     }
-    
-    function data_widget_by_name_active($name){
+
+    function data_widget_by_name_active($name)
+    {
         $this->db->select('*')
-                ->from('t_widget')
-                ->where('widgetName', $name)
-                ->where('widgetStatus', 'Active');
+            ->from('t_widget')
+            ->where('widgetName', $name)
+            ->where('widgetStatus', 'Active');
         return $this->db->get();
     }
 }

@@ -1,8 +1,16 @@
 <div class="row">
     <div class="col-lg-12">
-        <h3 class="page-header">Data Chat Button (Whatsapp)
+        <h3 class="page-header">Data Tawk to
         </h3>
         <div class="row">
+            <div class="alert alert border-grey" alert-dismissable>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Penting!!!</strong><br>
+                Untuk bisa mengunakan fasilitas widget Tawk To, lakukan registrasi terlebih dahulu di
+                <a href="https://dashboard.tawk.to/signup">https://dashboard.tawk.to/signup</a>.<br>
+                Untuk mendapatkan aplikasi chat di HP(android) lakukan download aplikasi tawk to di playstore. <br>
+                Masuk ke menu <b>admin->Property Settings->Site ID </b>, Copykan dan masukan ke kolom <b>App ID Anda</b>
+            </div>
             <div class="panel panel-green">
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -10,8 +18,7 @@
                             <thead>
                                 <tr>
                                     <th>Nama</th>
-                                    <th>Call to Action Text</th>
-                                    <th>Posisi Button</th>
+                                    <th>App ID Anda</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -19,15 +26,11 @@
                             <tbody>
                                 <?php foreach ($data as $value) { ?>
                                     <tr>
-                                        <td><?php echo $value->widgetName; ?></td>
-                                        <td><input class="form-control" name="cta<?php echo $value->id; ?>" id="cta<?php echo $value->id; ?>" value="<?php echo $value->widgetCta; ?>">
+                                        <td>
+                                            <?php echo $value->widgetName; ?>
                                         </td>
                                         <td>
-                                            <select name="pos<?php echo $value->id; ?>" id="pos<?php echo $value->id; ?>" class="form-control">
-                                                <option value="<?php echo $value->widgetPosition; ?>"><?php echo $value->widgetPosition; ?></option>
-                                                <option value="left">left</option>
-                                                <option value="right">right</option>
-                                            </select>
+                                            <input class="form-control" name="scriptid<?php echo $value->id; ?>" id="scriptid<?php echo $value->id; ?>" value="<?php echo $value->widgetScriptId; ?>">
                                         </td>
                                         <td>
                                             <select name="status<?php echo $value->id; ?>" id="status<?php echo $value->id; ?>" class="form-control">
@@ -51,21 +54,19 @@
 </div>
 <script>
     function updateWidget(id) {
-        var cta = $('#cta' + id).val();
         var status = $('#status' + id).val();
-        var position = $('#pos' + id).val();
+        var scriptid = $('#scriptid' + id).val();
         $.ajax({
             url: "<?php echo base_url('d/Widget/update_widget'); ?>",
             method: "POST",
             data: {
                 id: id,
                 status: status,
-                cta: cta,
-                position: position
+                scriptid: scriptid
             },
             success: function(data) {
                 $('#alert').html(data);
-                dataWidget('Chat Button');
+                dataWidget('Tawk.to');
             }
         });
     }

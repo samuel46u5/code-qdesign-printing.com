@@ -14,12 +14,17 @@
         Galery
     </span>
 </div>
+<!-- 
+<div class="container-fluid">
 
-<!-- <?php var_dump($galery[2]); ?> -->
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="//www.youtube.com/embed/TAibh3SqRUo"></iframe>
+    </div>
+
+</div> -->
 
 <section class="newproduct bgwhite p-t-30 p-b-35">
     <div class="container">
-
 
         <h2>Galery</h2> <br>
         <div id="myBtnContainer">
@@ -35,11 +40,12 @@
                 <div class="column <?php echo $value->nama_album; ?>">
 
                     <div class="content">
-
-                        <img src="<?php echo site_url('asset/img/uploads/galery/') . $value->image; ?>" class="bo18" alt="Mountains" style="width:100%">
+                        <div class="block3-img dis-block hov-img-zoom bo18">
+                            <img src="<?php echo site_url('asset/img/uploads/galery/') . $value->image; ?>" class="bo18" alt="Mountains" style="width:100%">
+                        </div>
 
                         <h4><?php echo $value->deskripsi; ?></h4>
-                        <p><?php echo $value->deskripsi; ?></p>
+                        <!-- <p><?php echo $value->deskripsi; ?></p> -->
                     </div>
 
                 </div>
@@ -47,8 +53,9 @@
             <!-- END GRID -->
         </div>
     </div>
-</section>
 
+
+</section>
 
 <script>
     filterSelection("all") // Execute the function and show all columns

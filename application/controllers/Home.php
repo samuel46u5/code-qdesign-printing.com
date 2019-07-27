@@ -29,6 +29,8 @@ class Home extends CI_Controller
         $data['footertagline'] = $this->M_design->data_footer_tagline()->result();
         $data['fbpixel'] = $this->M_ads->data_ads_by_name_active("FB Pixel")->row();
         $data['chatbutton'] = $this->M_widget->data_widget_by_name_active("Chat Button")->row();
+        $data['tawkto'] = $this->M_widget->data_widget_by_name_active("tawk.to")->row();
+
         $data['lastsale'] = $this->M_product->lastSale()->row();
         $data['header_home'] = $this->load->view('header_home', $data, TRUE);
         $data['footer'] = $this->load->view('footer', $data, TRUE);

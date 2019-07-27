@@ -35,6 +35,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/') ?>css/main.css?v=1.0">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/') ?>vendors/sweetalert/sweetalert.css">
 
+
+
     <style>
         * {
             box-sizing: border-box;
@@ -128,9 +130,35 @@
                         <a href="<?php echo base_url('pages/product/search?category=0&price=asc&group=') ?>"><i class="fa fa-navicon"></i> Kategori <i class="fa fa-caret-down"></i></a>
                         <?php echo $menucategory; ?>
                     </li>
+                    <li class="">
+                        <i class="fa fa-picture-o"></i> <a href="<?php echo base_url('pages/galery') ?>"> Galery</a>
+                        <ul class='sub_menu'>
+                            <li>
+                                <i class="fa fa-camera"></i> <a href="<?php echo base_url('pages/galery') ?>">Foto </a>
+                            </li>
+                            <li>
+                                <i class="fa fa-video-camera"></i><a href="<?php echo base_url('pages/galery') ?>">Video </a>
+                            </li>
+                        </ul>
 
+                    </li>
+                    <li class="">
+                        <i class="fa fa-question-circle-o"></i><a href="<?php echo base_url('pages/galery') ?>"> Bantuan</a>
+                    </li>
+                    <li class="">
+                        <i class="fa fa-info-circle"></i><a href="<?php echo base_url('pages/galery') ?>"> Info</a>
+                        <ul class='sub_menu'>
+                            <li>
+                                <i class="fa fa-id-card-o"></i> <a href="<?php echo base_url('pages/about') ?>"> Tentang Kami </a>
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i><a href="<?php echo base_url('pages/contact') ?>">Kontak Kami </a>
+                            </li>
+
+                        </ul>
+                    </li>
                     <li class="<?php echo $activemenu['payment']; ?>">
-                        <a href="<?php echo base_url('pages/confirm-payment') ?>">Konfirmasi Pembayaran</a>
+                        <i class="fa fa-money"> </i><a href="<?php echo base_url('pages/confirm-payment') ?>"> Konfirmasi Pembayaran</a>
                     </li>
                     <li>
                     </li>
@@ -243,8 +271,37 @@
                                 <a href="<?php echo base_url('pages/product/search?category=0&price=asc&group=') ?>"><i class="fa fa-navicon"></i> Kategori <i class="fa fa-caret-down"></i></a>
                                 <?php echo $menucategory; ?>
                             </li>
+                            <li class="">
+                                <i class="fa fa-picture-o"></i> <a href="<?php echo base_url('pages/galery') ?>"> Galery</a>
+                                <ul class='sub_menu'>
+                                    <li>
+                                        <i class="fa fa-camera"></i> <a href="<?php echo base_url('pages/galery') ?>">Foto </a>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-video-camera"></i><a href="<?php echo base_url('pages/galery') ?>">Video </a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                            <li class="">
+                                <i class="fa fa-question-circle-o"></i><a href="<?php echo base_url('pages/galery') ?>"> Bantuan</a>
+                            </li>
+                            <li class="">
+                                <i class="fa fa-info-circle"></i><a href="<?php echo base_url('pages/galery') ?>"> Info</a>
+                                <ul class='sub_menu'>
+                                    <li>
+                                        <i class="fa fa-id-card-o"></i> <a href="<?php echo base_url('pages/about') ?>"> Tentang Kami </a>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-envelope-o"></i><a href="<?php echo base_url('pages/contact') ?>">Kontak Kami </a>
+                                    </li>
+
+                                </ul>
+                            </li>
                             <li class="<?php echo $activemenu['payment']; ?>">
-                                <a href="<?php echo base_url('pages/confirm-payment') ?>">Konfirmasi Pembayaran</a>
+                                <i class="fa fa-money"> </i><a href="<?php echo base_url('pages/confirm-payment') ?>"> Konfirmasi Pembayaran</a>
+                            </li>
+                            <li>
                             </li>
                         </ul>
                     </nav>

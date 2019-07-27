@@ -17,6 +17,7 @@ class Widget extends CI_Controller
     function data_widget_by_name()
     {
         $name = $this->input->post('name');
+
         $data['data'] = $this->M_widget->data_widget_by_name($name)->result();
         if ($name == "Chat Button") {
             $this->load->view('dashboard/widget/data_chat_button', $data);
@@ -26,6 +27,9 @@ class Widget extends CI_Controller
             $this->load->view('dashboard/widget/data_facebook_comment', $data);
         } elseif ($name == "Order Via WhatsApp") {
             $this->load->view('dashboard/widget/data_order_via_wa', $data);
+        } elseif ($name == "Tawk.to") {
+
+            $this->load->view('dashboard/widget/data_tawkto', $data);
         }
     }
 

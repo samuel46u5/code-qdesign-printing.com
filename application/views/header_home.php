@@ -86,25 +86,50 @@
 }
 ?>
 
+    <!--Start of Tawk.to Script-->
+
+    <!-- <?php if (!empty($tawkto)) { ?>
+                                                                        <script type="text/javascript">
+                                                                            alert('masuk');
+                                                                            var Tawk_API = Tawk_API || {},
+                                                                                Tawk_LoadStart = new Date();
+                                                                            (function() {
+                                                                                var s1 = document.createElement("script"),
+                                                                                    s0 = document.getElementsByTagName("script")[0];
+                                                                                s1.async = true;
+                                                                                s1.src = 'https://embed.tawk.to/' + <?= $tawkto->widgetScriptId; ?> + '/default';
+                                                                                // 5d159e9836eab9721119a32d
+                                                                                s1.charset = 'UTF-8';
+                                                                                s1.setAttribute('crossorigin', '*');
+                                                                                s0.parentNode.insertBefore(s1, s0);
+                                                                            })();
+                                                                        </script>
+    <?php } ?> -->
+    <!--End of Tawk.to Script-->
+
+    <?php if (!empty($tawkto)) { ?>
+        <script type="text/javascript">
+            var Tawk_API = Tawk_API || {},
+                Tawk_LoadStart = new Date();
+            (function() {
+                var s1 = document.createElement("script"),
+                    s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/<?= $tawkto->widgetScriptId; ?>/default';
+                // 5d159e9836eab9721119a32d
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                s0.parentNode.insertBefore(s1, s0);
+            })();
+        </script>
+    <?php } ?>
+    <!--End of Tawk.to Script-->
+
 
 </head>
 
 <body class="animsition">
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-        var Tawk_API = Tawk_API || {},
-            Tawk_LoadStart = new Date();
-        (function() {
-            var s1 = document.createElement("script"),
-                s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/5d159e9836eab9721119a32d/default';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
-    </script>
-    <!--End of Tawk.to Script-->
+
     <div class="wrap_header fixed-header2 trans-0-4">
         <a href="<?php echo base_url('') ?>" class="logo">
             <img src="<?php echo site_url('asset/img/uploads/banner/' . $logo->image . ''); ?>" alt="<?php echo $profile->companyName; ?>">
@@ -274,6 +299,15 @@
                             </li>
                             <li class="">
                                 <i class="fa fa-info-circle"></i><a href="<?php echo base_url('pages/galery') ?>"> Info</a>
+                                <ul class='sub_menu'>
+                                    <li>
+                                        <i class="fa fa-id-card-o"></i> <a href="<?php echo base_url('pages/about') ?>"> Tentang Kami </a>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-envelope-o"></i><a href="<?php echo base_url('pages/contact') ?>">Kontak Kami </a>
+                                    </li>
+
+                                </ul>
                             </li>
                             <li class="<?php echo $activemenu['payment']; ?>">
                                 <i class="fa fa-money"> </i><a href="<?php echo base_url('pages/confirm-payment') ?>"> Konfirmasi Pembayaran</a>
