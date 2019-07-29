@@ -1,18 +1,22 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+date_default_timezone_set('Asia/Bangkok');
 
-class Invoice extends CI_Controller {
+class Invoice extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
-        $this->load->model(array('M_notify','M_widget', 'M_company', 'M_design', 'M_category', 'M_invoice', 'M_user', 'M_bank', 'M_order'));
+        $this->load->model(array('M_notify', 'M_widget', 'M_company', 'M_design', 'M_category', 'M_invoice', 'M_user', 'M_bank', 'M_order'));
         $this->load->database();
         $this->load->library(array('session', 'image_lib', 'upload'));
         $this->load->helper(array('date', 'form', 'url', 'cookie'));
     }
 
-    function index() {
+    function index()
+    {
         $profil = $this->M_company->data_company()->row();
         $data['title'] = "Invoice Belanja | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
@@ -27,7 +31,8 @@ class Invoice extends CI_Controller {
         $this->load->view('frontend/checkout', $data);
     }
 
-    function invoice() {
+    function invoice()
+    {
         $profil = $this->M_company->data_company()->row();
         $data['title'] = "Invoice Belanja | " . $profil->companyName;
         $idorder = $this->input->get('idorder');
@@ -49,7 +54,8 @@ class Invoice extends CI_Controller {
         $this->load->view('frontend/invoice', $data);
     }
 
-    function update_bank_invoice_partner() {
+    function update_bank_invoice_partner()
+    {
         $idinvoice = $this->input->post('idinvoicepartner');
         $iduser = $this->input->post('iduser');
         $idbank = $this->input->post('bank');
@@ -68,7 +74,8 @@ class Invoice extends CI_Controller {
         echo $this->upload->display_errors();
     }
 
-    function invoice_partner() {
+    function invoice_partner()
+    {
         $idorder = $this->input->get('idorder');
         $iduser = $this->input->get('user');
         $data['title'] = "title";
@@ -85,7 +92,8 @@ class Invoice extends CI_Controller {
         $this->load->view('frontend/invoice_partner', $data);
     }
 
-    function konfirmasi_pembayaran_partner() {
+    function konfirmasi_pembayaran_partner()
+    {
         $idinvoice = $this->input->post('idinvoice');
         $iduser = $this->input->post('iduser');
 
@@ -131,7 +139,8 @@ class Invoice extends CI_Controller {
         }
     }
 
-    function form_confirm_payment() {
+    function form_confirm_payment()
+    {
         $profil = $this->M_company->data_company()->row();
         $data['title'] = "Konfirmasi Pembayaran Belanja | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
@@ -147,7 +156,8 @@ class Invoice extends CI_Controller {
         $this->load->view('frontend/confirm_payment', $data);
     }
 
-    function confirm_payment_order() {
+    function confirm_payment_order()
+    {
         $datestring = '%Y-%m-%d %H:%i';
         $idorder = $this->input->post('idorder');
 
@@ -199,7 +209,7 @@ class Invoice extends CI_Controller {
 
             $mailto = $company->email;
             $subject = "Order Masuk sudah Transfer";
-            $msg = '<p><b>Order Masuk sudah transfer</b><br></p><p>Order masuk dengan ID Order '.$idorder.' <br> Silahkan Proses di menu Sales > Order Masuk </p>';
+            $msg = '<p><b>Order Masuk sudah transfer</b><br></p><p>Order masuk dengan ID Order ' . $idorder . ' <br> Silahkan Proses di menu Sales > Order Masuk </p>';
 
             $this->load->library('Mail_sender');
             $Mail = new Mail_sender;
@@ -211,7 +221,8 @@ class Invoice extends CI_Controller {
         }
     }
 
-    function remove_cart() {
+    function remove_cart()
+    {
         $newarray = [];
         foreach ($this->cart->contents() as $key) {
             $tmp['rowid'] = $key['rowid'];
@@ -221,18 +232,18 @@ class Invoice extends CI_Controller {
         $this->cart->update($newarray);
     }
 
-    function store_reminder_orderin($idorder){
+    function store_reminder_orderin($idorder)
+    {
         $data = array(
             'notifyName' => 'Closing Paid',
             'idorder' => $idorder,
             'notifyStatus' => 0,
         );
-        $ceknotify = $this->M_notify->notify_by_idorder($idorder)->row(); 
-        if($ceknotify->notifyStatus == 0){
+        $ceknotify = $this->M_notify->notify_by_idorder($idorder)->row();
+        if ($ceknotify->notifyStatus == 0) {
             $this->M_notify->update_notify_by_idorder($idorder, $data);
-        }else{
-        $this->M_notify->store_reminder_orderin($data);
+        } else {
+            $this->M_notify->store_reminder_orderin($data);
         }
     }
-
 }
