@@ -19,6 +19,7 @@
         </div>
     </div>
 <?php } ?>
+
 <section class="slide1">
     <div class="wrap-slick1">
         <div class="slick1">
@@ -42,6 +43,32 @@
         </div>
     </div>
 </section>
+
+<section class="slide1">
+    <div class="wrap-slick1">
+        <div class="slick1">
+            <?php
+            $i = 1;
+            foreach ($bannerhome as $value) {
+                ?>
+                <div class="item-slick1 item<?php echo $i++; ?>-slick1" style="background-image: url(<?php echo site_url('asset/img/uploads/banner/' . $value->image . '') ?>);">
+                    <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-30">
+                        <h4 class="caption1-slide1 t-center bo14 p-b-6 animated visible-false m-text-glow m-b-22" data-appear="fadeInUp">
+                            <?php echo $value->bannerText; ?>
+                        </h4>
+                        <div class="wrap-btn-slide1 w-size2 animated visible-false" data-appear="zoomIn">
+                            <a href="<?php echo base_url('pages/product/search?category=0&price=asc&group=') ?>" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4 bo17">
+                                Shop Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</section>
+
+
 
 
 
@@ -350,12 +377,10 @@
         <h4 class="m-text12 t-center">
             Support By
         </h4>
-        <span class="col-md-3">
-            <img src="<?php echo base_url('asset/img/icons/pos.png') ?>">
-            <img src="<?php echo base_url('asset/img/icons/pos.png') ?>">
-            <img src="<?php echo base_url('asset/img/icons/pos.png') ?>">
-            <img src="<?php echo base_url('asset/img/icons/pos.png') ?>">
-            <img src="<?php echo base_url('asset/img/icons/pos.png') ?>">
+        <span class="col-md-12">
+
+            <img src="<?php echo base_url('asset/img/icons/allsupport.jpg') ?>">
+
         </span>
 
 

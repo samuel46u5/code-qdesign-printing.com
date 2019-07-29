@@ -24,7 +24,7 @@
     <script src="<?php echo base_url('asset/') ?>js/jquery.validate.min.js"></script>
 </head>
 
-<body>
+<body class="animsition">
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
