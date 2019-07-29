@@ -2300,7 +2300,7 @@ li.sale-noti>a {
 .subs_btn {
     background: #76502e;
     text-transform: uppercase;
-    color: #fff;
+    color: #6AC1FC;
     font-family: Montserrat-Regular;
     font-weight: 600;
     font-size: 14px;
@@ -2319,7 +2319,7 @@ li.sale-noti>a {
 
 .subs_btn:hover {
     background: transparent;
-    color: #804000;
+    color: #6AC1FC;
 }
 
 
