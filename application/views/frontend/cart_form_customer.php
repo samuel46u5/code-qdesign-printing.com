@@ -123,11 +123,11 @@
                     <div class="col-lg-2 form-group">
                         <label for="postalcode"><small>Kode Pos</small></label>
                         <input onkeyup="if (/\D/g.test(this.value))
-                                    this.value = this.value.replace(/\D/g, '')" class="form-control" type="text" name="postalcode" id="postalcode" placeholder="Kode Pos" required="" value="<?php
-                                                                                                                                                                                                if (empty($ordershiping)) { } else {
-                                                                                                                                                                                                    echo $ordershiping->kodePos;
-                                                                                                                                                                                                }
-                                                                                                                                                                                                ?>" minlength="5" maxlength="8">
+                                    this.value = this.value.replace(/\D/g, '')" class="form-control" type="text" name="postalcode" id="postalcode" placeholder="Kode Pos" value="<?php
+                                                                                                                                                                                    if (empty($ordershiping)) { } else {
+                                                                                                                                                                                        echo $ordershiping->kodePos;
+                                                                                                                                                                                    }
+                                                                                                                                                                                    ?>" minlength="5" maxlength="8">
                     </div>
                     <div class="col-lg-6 form-group">
                         <label for="customerphone"><small>Nomor Telepon / HP</small></label>
