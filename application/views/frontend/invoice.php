@@ -1,4 +1,4 @@
-<?php echo $header; ?>  
+<?php echo $header; ?>
 <div class="bread-crumb-detail bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
     <a href="<?php echo base_url('') ?>" class="s-text16">
         Home
@@ -16,12 +16,12 @@
                     <div class="card-body p-0 bo17">
                         <div class="mb-2 bo18 p-2 bg-dark text-center text-white">
                             <h4>Invoice # <?php echo $invoice->idorder; ?><br> Status <?php
-                                if ($invoice->invoiceStatus == "UNPAID") {
-                                    echo "<span class='text-danger'>" . $invoice->invoiceStatus . "</span>";
-                                } else {
-                                    echo "<span class='text-success'>" . $orderresult->status . "</span>";
-                                }
-                                ?>
+                                                                                        if ($invoice->invoiceStatus == "UNPAID") {
+                                                                                            echo "<span class='text-danger'>" . $invoice->invoiceStatus . "</span>";
+                                                                                        } else {
+                                                                                            echo "<span class='text-success'>" . $orderresult->status . "</span>";
+                                                                                        }
+                                                                                        ?>
                             </h4>
                         </div>
                         <div class="row p-r-20 p-l-20 p-t-20 p-b-20">
@@ -40,7 +40,8 @@
                                 <p class="font-weight-bold mb-4">Ditagihkan Kepada</p>
                                 <p class="mb-1"><?php echo $ordershiping->firstName . " " . $ordershiping->lastName; ?></p>
                                 <p class="mb-1"><b>Email</b> : <?php echo $ordershiping->custEmail; ?></p>
-                                <p><b>Alamat </b>: <?php echo $ordershiping->desa . ", " . $ordershiping->rt . " " . $ordershiping->rw . " , " . $ordershiping->kecamatan . " , " . $ordershiping->namaKabupaten . " , " . $ordershiping->namaProvinsi . ". (kode pos: " . $ordershiping->kodePos . " )."; ?></p>
+                                <p><b>Alamat </b>: <?php echo $ordershiping->fullAddress . ", " . $ordershiping->desa . ", " . $ordershiping->rt . "-" . $ordershiping->rw . ", " . $ordershiping->kecamatan . ", " . $ordershiping->namaKabupaten . ", " . $ordershiping->namaProvinsi . ". (kode pos: " . $ordershiping->kodePos . " )."; ?></p>
+
                                 <p class="mb-1"><b>Telp. </b><?php echo $ordershiping->custHp; ?></p>
                             </div>
                             <div class="col-md-6 text-right">
@@ -115,9 +116,9 @@
                             <div class="py-3 px-5 text-right">
                                 <div class="mb-2">Uniq Payment</div>
                                 <div class="h2 font-weight-light"><?php
-                                    $countstr = strlen($orderresult->orderSumary);
-                                    echo "Rp. " . number_format(substr($orderresult->orderSumary, $countstr - 3))
-                                    ?></div>
+                                                                    $countstr = strlen($orderresult->orderSumary);
+                                                                    echo "Rp. " . number_format(substr($orderresult->orderSumary, $countstr - 3))
+                                                                    ?></div>
                             </div>
                         </div>
                     </div>
@@ -154,9 +155,7 @@
                             </div>
                             <div class="p-2">
                                 <?php
-                                if ($invoice->invoiceStatus == "PAID" || $invoice->invoiceStatus == "reject") {
-                                    
-                                } else {
+                                if ($invoice->invoiceStatus == "PAID" || $invoice->invoiceStatus == "reject") { } else {
                                     ?>
                                     <button class="btn btn-block subs_btn form-control" type="button" data-toggle="modal" data-target="#modalPayment">
                                         Konfirmasi Sudah Bayar
@@ -203,7 +202,7 @@
                         <label>Upload Bukti Transfer</label>
                         <input class="form-control" type="file" name="slip" id="slip" placeholder="Bukti Transfer" required="" onchange="preview(this);">
                         <hr>
-                        <img id="slippreview" style="width: 50%; height: 50%;"/>
+                        <img id="slippreview" style="width: 50%; height: 50%;" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -223,12 +222,13 @@
     function preview(oInput) {
         var oFReader = new FileReader();
         oFReader.readAsDataURL(document.getElementById("slip").files[0]);
-        oFReader.onload = function (oFREvent) {
+        oFReader.onload = function(oFREvent) {
             document.getElementById("slippreview").src = oFREvent.target.result;
         };
         ValidateSingleInput(oInput);
     }
     var _validFileExtensions = [".jpg", ".jpeg", ".png"];
+
     function ValidateSingleInput(oInput) {
         if (oInput.type == "file") {
             var sFileName = oInput.value;
@@ -253,4 +253,5 @@
     }
 </script>
 </body>
+
 </html>
