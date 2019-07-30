@@ -1,1 +1,41 @@
 https://colorlib.com/wp/free-bootstrap-ecommerce-website-templates/
+
+
+<!-- Modal -->
+
+<div class="modal fade" id="modalPayment">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form class="login_form" action="<?php echo base_url('Invoice/confirm_payment_order') ?>" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+
+                <div class="modal-header bg-dark text-white text-center">
+                    <h6>Konfirmasi Pembayaran</h6>
+                    <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="idinvoice" value="<?php echo $invoice->idinvoice; ?>">
+                    <input type="hidden" name="idorder" value="<?php echo $invoice->idorder; ?>">
+                    <div class="col-md-12 p-r-20 p-l-20 form-group">
+                        <label>Transfer ke Bank</label>
+                        <input class="form-control" type="text" name="bankname" id="bankname" value="<?php echo $invoice->paymentMethod; ?>" readonly="">
+                    </div>
+                    <div class="col-md-12 p-r-20 p-l-20 form-group">
+                        <label>Total Pembayaran</label>
+                        <input class="form-control" type="text" name="" id="" required="" readonly="" value="<?php echo " Rp. " . number_format($invoice->invoicePrice); ?>">
+                    </div>
+                    <div class="col-md-12 p-r-20 p-l-20 form-group">
+                        <label>Upload Bukti Transfer</label>
+                        <input class="form-control" type="file" name="slip" id="slip" placeholder="Bukti Transfer" required="" onchange="preview(this);">
+                        <hr>
+                        <img id="slippreview" style="width: 50%; height: 50%;" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-block subs_btn form-control" id="btn-upload" type="submit" onclick="confirmPayment();">
+                        Konfirmasi Sudah Bayar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

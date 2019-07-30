@@ -1,17 +1,20 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-class Cart extends CI_Controller {
-    public function __construct() {
+defined('BASEPATH') or exit('No direct script access allowed');
+class Cart extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
-        $this->load->model(array('M_widget','M_wishlist', 'M_company', 'M_design', 'M_product', 'M_category', 'M_bank', 'M_invoice', 'M_order', 'M_shiping_gateway', 'M_marketing'));
+        $this->load->model(array('M_widget', 'M_wishlist', 'M_company', 'M_design', 'M_product', 'M_category', 'M_bank', 'M_invoice', 'M_order', 'M_shiping_gateway', 'M_marketing'));
         $this->load->database();
         $this->load->library(array('cart', 'image_lib', 'upload'));
         $this->load->helper(array('cookie', 'date', 'form', 'url'));
     }
 
-    function index() {
+    function index()
+    {
         $profil = $this->M_company->data_company()->row();
-        $data['title'] = "Keranjang Belanja | ".$profil->companyName;
+        $data['title'] = "Keranjang Belanja | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
         $data['activemenu'] = array('home' => "", 'product' => "", 'cart' => "sale-noti", 'trackorder' => "", 'payment' => "", 'sale' => "", 'about' => "", 'contact' => "");
@@ -24,7 +27,8 @@ class Cart extends CI_Controller {
         $this->load->view('frontend/cart', $data);
     }
 
-    function a(){
+    function a()
+    {
         echo "<pre>";
         print_r($this->session->userdata());
         echo date('Hi');
@@ -32,9 +36,10 @@ class Cart extends CI_Controller {
         echo "<pre>";
     }
 
-    function cart_partner() {
+    function cart_partner()
+    {
         $profil = $this->M_company->data_company()->row();
-        $data['title'] = "Keranjang Belanja | ".$profil->companyName;
+        $data['title'] = "Keranjang Belanja | " . $profil->companyName;
         $idorder = $this->input->get('idorder');
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
@@ -50,12 +55,13 @@ class Cart extends CI_Controller {
         $this->load->view('frontend/cart_partner', $data);
     }
 
-    function do_upload_file_design() {
+    function do_upload_file_design()
+    {
         $session = $this->session->userdata('__ci_last_regenerate');
         $time = date('Hi');
         $config['upload_path'] = './asset/img/uploads/filedesign/';
         $config['allowed_types'] = "*";
-        $config['file_name'] = $session.$time.$_FILES['file']['name'];
+        $config['file_name'] = $session . $time . $_FILES['file']['name'];
         $config['encrypt_name'] = FALSE;
         $this->upload->initialize($config);
         if (!empty($_FILES['file']['name'])) {
@@ -76,8 +82,9 @@ class Cart extends CI_Controller {
             echo $this->upload->display_errors();
         }
     }
-    
-    function add_to_cart() {
+
+    function add_to_cart()
+    {
         $session = $this->session->userdata('__ci_last_regenerate');
         $time = date('Hi');
         $generate_id_order = $this->M_order->generate_id_order();
@@ -87,26 +94,26 @@ class Cart extends CI_Controller {
         $qty = $this->input->post('qty');
 
         $cekqty = $this->M_product->product_by_id($idproduct)->row();
-        if($cekqty->multilevelStatus == "yes"){
+        if ($cekqty->multilevelStatus == "yes") {
             $cekprice = $this->M_product->get_multiple_price($idproduct, $qty)->row();
-            if(empty($cekprice->multilevelPrice)){
+            if (empty($cekprice->multilevelPrice)) {
                 $priceunlimit = $this->M_product->get_multiple_price_un($idproduct)->row();
                 $price = $priceunlimit->multilevelPrice;
-            }else{
+            } else {
                 $price = $cekprice->multilevelPrice;
             }
-        }else{
+        } else {
             $price = $this->input->post('price');
         }
-        
+
         $filedesign = $this->input->post('file');
         $linkdesign = $this->input->post('linkdesign');
-        
-        if(!empty($filedesign)){
-            $file = $session.$time.$filedesign;
-        }elseif(!empty($linkdesign)){
+
+        if (!empty($filedesign)) {
+            $file = $session . $time . $filedesign;
+        } elseif (!empty($linkdesign)) {
             $file = $linkdesign;
-        }else{
+        } else {
             $file = "null";
         }
 
@@ -116,9 +123,9 @@ class Cart extends CI_Controller {
             'price' => $price,
             'qty' => $qty,
             'coupon' => '',
-            'options' => array('filedesign'=> str_replace(' ', '_',$file), 'image' => $this->input->post('image'), 'weight' => $this->input->post('weight'), 'note' => $this->input->post('note'))
+            'options' => array('filedesign' => str_replace(' ', '_', $file), 'image' => $this->input->post('image'), 'weight' => $this->input->post('weight'), 'note' => $this->input->post('note'))
         );
-        
+
         $this->cart->insert($data);
         if (empty($this->session->userdata('idorder'))) {
             $this->session->set_userdata('idorder', $generate_id_order);
@@ -135,7 +142,8 @@ class Cart extends CI_Controller {
         $this->load_qty_cart();
     }
 
-    function store_session_to_order() {
+    function store_session_to_order()
+    {
         $date = mdate('%Y-%m-%d');
         $generate_id_order = $this->M_order->generate_id_order();
 
@@ -171,7 +179,8 @@ class Cart extends CI_Controller {
         }
     }
 
-    function load_qty_cart() {
+    function load_qty_cart()
+    {
         $newarray = array();
         foreach ($this->cart->contents() as $key) {
             $tmp['qty'] = $key['qty'];
@@ -180,7 +189,8 @@ class Cart extends CI_Controller {
         echo array_sum(array_column($newarray, 'qty'));
     }
 
-    function load_list_cart() {
+    function load_list_cart()
+    {
         $list = '';
         $list .= '<ul class="header-cart-wrapitem">';
         foreach ($this->cart->contents() as $items) {
@@ -191,19 +201,20 @@ class Cart extends CI_Controller {
             <div class="header-cart-item-txt">
             <a href="#" class="header-cart-item-name">' . $items['name'] . '</a>
             <span class="header-cart-item-info">
-            ' . $items['qty'] . ' pcs x <span class="money">'. $items['price'] . '</span>
+            ' . $items['qty'] . ' pcs x <span class="money">' . $items['price'] . '</span>
             </span>
             </div>
             </li>
             </ul>';
         }
         $list .= '<div class="header-cart-total">'
-        . 'Total: '.$this->cart->format_number($this->cart->total()).''
-        . '</div>';
+            . 'Total: ' . $this->cart->format_number($this->cart->total()) . ''
+            . '</div>';
         echo $list;
     }
 
-    function update_qty_cart() {
+    function update_qty_cart()
+    {
         $qty = $this->input->post('qty');
         $idproduct = $this->input->post('idproduct');
         $cekproduct = $this->M_product->product_by_id($idproduct)->row();
@@ -211,33 +222,34 @@ class Cart extends CI_Controller {
         if ($cekproduct->quantityStock < $qty) {
             echo '<script>swal("Gagal","Anda melebih stok yang ada","error");</script>';
         } else {
-        if($cekproduct->multilevelStatus == "yes"){
-            $cekprice = $this->M_product->get_multiple_price($idproduct, $qty)->row();
-            if(empty($cekprice->multilevelPrice)){
-                $priceunlimit = $this->M_product->get_multiple_price_un($idproduct)->row();
-                $price = $priceunlimit->multilevelPrice;
-            }else{
-                $price = $cekprice->multilevelPrice;
+            if ($cekproduct->multilevelStatus == "yes") {
+                $cekprice = $this->M_product->get_multiple_price($idproduct, $qty)->row();
+                if (empty($cekprice->multilevelPrice)) {
+                    $priceunlimit = $this->M_product->get_multiple_price_un($idproduct)->row();
+                    $price = $priceunlimit->multilevelPrice;
+                } else {
+                    $price = $cekprice->multilevelPrice;
+                }
+            } else {
+                $ceksale = $this->M_marketing->data_product_sale_by_id($idproduct)->row();
+                if (!empty($ceksale)) {
+                    $price = $ceksale->pricesale;
+                } else {
+                    $price = $cekproduct->price;
+                }
             }
-        }else{
-            $ceksale = $this->M_marketing->data_product_sale_by_id($idproduct)->row();
-            if(!empty($ceksale)){
-                $price = $ceksale->pricesale;
-            }else{
-            $price = $cekproduct->price;
-            }
-        }
-        $data = array(
-            'rowid' => $this->input->post('rowid'),
-            'qty' => $qty,
-            'price' => $price
-        );
+            $data = array(
+                'rowid' => $this->input->post('rowid'),
+                'qty' => $qty,
+                'price' => $price
+            );
             $this->cart->update($data);
         }
         $this->show_cart();
     }
 
-    function cek_stok() {
+    function cek_stok()
+    {
         $data = array();
         foreach ($this->cart->contents() as $value) {
             $datatmp = $this->M_product->product_by_id($value['id'])->row();
@@ -271,7 +283,8 @@ class Cart extends CI_Controller {
         }
     }
 
-    function update_real_stock($rowid, $qty) {
+    function update_real_stock($rowid, $qty)
+    {
         $data = [];
         foreach ($this->cart->contents() as $key) {
             $tmp['rowid'] = $rowid;
@@ -281,7 +294,8 @@ class Cart extends CI_Controller {
         $this->cart->update($data);
     }
 
-    function delete_product() {
+    function delete_product()
+    {
         $data = array(
             'rowid' => $this->input->post('rowid'),
             'qty' => 0
@@ -290,7 +304,8 @@ class Cart extends CI_Controller {
         $this->show_cart();
     }
 
-    function show_cart() {
+    function show_cart()
+    {
         $idorder = $this->input->get('idorder');
         if (empty($this->cart->total())) {
             echo '<div class="col-12">
@@ -334,7 +349,7 @@ class Cart extends CI_Controller {
                 </div>
                 </td>
                 <td class="column-6">Rp. ' . $this->cart->format_number($items['subtotal']) . '</td>
-                <td class="column-7"><button class="remove-cart btn btn-sm btn-danger" id="' . $items['rowid'] . '"><i class="fa fa-trash"></i></button></td>
+                <td class="column-7"><button class="remove-cart btn-sm btn-danger" id="' . $items['rowid'] . '"><i class="fa fa-trash"></i></button></td>
                 </tr>
                 ';
             }
@@ -367,7 +382,8 @@ class Cart extends CI_Controller {
         }
     }
 
-    function store_cart() {
+    function store_cart()
+    {
         $date = mdate('%Y-%m-%d');
         $idorderget = $this->input->get('idorder');
         $ipaddress = $this->input->ip_address();
@@ -451,9 +467,10 @@ class Cart extends CI_Controller {
         redirect('pages/cart/form-customer?idorder=' . $idorder . '');
     }
 
-    function cart_form_customer() {
+    function cart_form_customer()
+    {
         $profil = $this->M_company->data_company()->row();
-        $data['title'] = "Keranjang Belanja | ".$profil->companyName;
+        $data['title'] = "Keranjang Belanja | " . $profil->companyName;
         $idorder = $this->input->get('idorder');
 
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
@@ -472,10 +489,11 @@ class Cart extends CI_Controller {
         $this->load->view('frontend/cart_form_customer', $data);
     }
 
-    function cart_shiping() {
+    function cart_shiping()
+    {
         $idorder = $this->input->get('idorder');
         $profil = $this->M_company->data_company()->row();
-        $data['title'] = "Keranjang Belanja | ".$profil->companyName;
+        $data['title'] = "Keranjang Belanja | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
         $data['activemenu'] = array('home' => "", 'product' => "", 'cart' => "sale-noti", 'trackorder' => "", 'payment' => "", 'sale' => "", 'about' => "", 'contact' => "");
@@ -495,9 +513,10 @@ class Cart extends CI_Controller {
         $this->load->view('frontend/cart_shiping', $data);
     }
 
-    function cart_payment() {
+    function cart_payment()
+    {
         $profil = $this->M_company->data_company()->row();
-        $data['title'] = "Keranjang Belanja | ".$profil->companyName;
+        $data['title'] = "Keranjang Belanja | " . $profil->companyName;
         $idorder = $this->input->get('idorder');
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
         $data['icontitle'] = $this->M_design->data_banner_by_pos("icontitle")->row();
@@ -518,15 +537,16 @@ class Cart extends CI_Controller {
         $this->load->view('frontend/cart_payment', $data);
     }
 
-    function add_to_wishlist() {
+    function add_to_wishlist()
+    {
         $mailformat = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/";
         $phoneformat = "/([\[\(])?(?:(\+62)|62|0)\1? ?-? ?8(?!0|4|6)\d(?!0)\d\1? ?-? ?\d{3,4} ?-? ?\d{3,5}(?: ?-? ?\d{3})?\b/";
         $emailhp = $this->input->post('emailhp');
-            if(preg_match($mailformat, $emailhp)){
-                $email = $emailhp;
-            }else if(preg_match($phoneformat, $emailhp)){
-                $phone = $emailhp;
-            }
+        if (preg_match($mailformat, $emailhp)) {
+            $email = $emailhp;
+        } else if (preg_match($phoneformat, $emailhp)) {
+            $phone = $emailhp;
+        }
         $data = array(
             'idproduct' => $this->input->post('idproduct'),
             'ipaddress' => $this->input->ip_address(),
@@ -535,8 +555,9 @@ class Cart extends CI_Controller {
         );
         $this->M_wishlist->store_wishlist($data);
     }
-    
-    function total_price(){
+
+    function total_price()
+    {
         $qty = $this->input->post('qty');
         $idproduct = $this->input->post('id');
         $cekproduct = $this->M_product->product_by_id($idproduct)->row();
@@ -545,24 +566,24 @@ class Cart extends CI_Controller {
         if ($cekproduct->quantityStock < $qty) {
             $price = 0;
         } else {
-        if($cekproduct->multilevelStatus == "yes"){
-            $cekprice = $this->M_product->get_multiple_price($idproduct, $qty)->row();
-            if(empty($cekprice->multilevelPrice)){
-                $priceunlimit = $this->M_product->get_multiple_price_un($idproduct)->row();
-                $price = $priceunlimit->multilevelPrice;
-            }else{
-                $price = $cekprice->multilevelPrice;
-            }
-        }else{
-            $ceksale = $this->M_marketing->data_product_sale_by_id($idproduct)->row();
-            if(!empty($ceksale)){
-                $price = $ceksale->pricesale;
-            }else{
-            $price = $cekproduct->price;
+            if ($cekproduct->multilevelStatus == "yes") {
+                $cekprice = $this->M_product->get_multiple_price($idproduct, $qty)->row();
+                if (empty($cekprice->multilevelPrice)) {
+                    $priceunlimit = $this->M_product->get_multiple_price_un($idproduct)->row();
+                    $price = $priceunlimit->multilevelPrice;
+                } else {
+                    $price = $cekprice->multilevelPrice;
+                }
+            } else {
+                $ceksale = $this->M_marketing->data_product_sale_by_id($idproduct)->row();
+                if (!empty($ceksale)) {
+                    $price = $ceksale->pricesale;
+                } else {
+                    $price = $cekproduct->price;
+                }
             }
         }
-        }
-        echo $price*$qty;
+        echo number_format($price * $qty); //->modified by agus
+        // echo $price * $qty; ->> original
     }
-
 }
