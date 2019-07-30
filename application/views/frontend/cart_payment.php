@@ -35,7 +35,7 @@
                         </tr>
                         <tr>
                             <td><small>Alamat</small></td>
-                            <td><small><?php echo $detailorder->desa . ", " . $detailorder->rt . "-" . $detailorder->rw . ", " . $detailorder->kecamatan . ", " . $detailorder->namaKabupaten . ", " . $detailorder->namaProvinsi . ", " . $detailorder->kodePos; ?></small></td>
+                            <td><small><?php echo $detailorder->fullAddress . ", " . $detailorder->desa . ", " . $detailorder->rt . "-" . $detailorder->rw . ", " . $detailorder->kecamatan . ", " . $detailorder->namaKabupaten . ", " . $detailorder->namaProvinsi . ", " . $detailorder->kodePos; ?></small></td>
                         </tr>
                         <tr>
                             <td><small>Kontak</small></td>
@@ -47,8 +47,8 @@
                     <h6>Transfer Via Bank</h6>
                 </div>
                 <form class="login_form row form-customer bo20" action="<?php echo base_url('Order/store_payment?idorder=' . $detailorder->idorder . '') ?>" method="post">
-                    <input type="hidden" name="ordersumary" value="<?php echo $ordershiping->totalPrice;?>">
-                    <input type="hidden" name="voucher" value="<?php echo $detailorder->voucherPrice;?>">
+                    <input type="hidden" name="ordersumary" value="<?php echo $ordershiping->totalPrice; ?>">
+                    <input type="hidden" name="voucher" value="<?php echo $detailorder->voucherPrice; ?>">
                     <div class="col-md-6 form-group">
                         <select class="form-control" id="bank" name="bank" required="">
                             <option selected disable value=""> Pilih Bank </option>
@@ -76,7 +76,7 @@
                         </button>
                     </div>
                     <div id="voucher">
-                    </div> 
+                    </div>
                 </div>
             </div>
             <div class="bo9 col-md-5 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 bg5">
@@ -85,29 +85,29 @@
                 </h5>
 
                 <div class="flex-w flex-sb-m p-b-12 bo20">
-                        <table>
-                    <?php foreach ($this->cart->contents() as $items) { ?>
+                    <table>
+                        <?php foreach ($this->cart->contents() as $items) { ?>
                             <tr>
                                 <th class="p-r-10"><small>(<?php echo $items['qty']; ?>)</small></th>
                                 <td class="p-r-10"><small> <?php echo $items['name']; ?></small></td>
                                 <td><small>Rp. <?php echo number_format($items['subtotal']); ?></small></td>
                             </tr>
-                    <?php } ?>
-                        </table>
+                        <?php } ?>
+                    </table>
                 </div>
                 <div class="flex-w flex-sb-m p-b-12 bo20">
-                        <table>
-                            <tr>
-                                <th class="p-r-20"><small>Jumlah Pesanan</small></th>
-                                <td><small><?php echo array_sum(array_column($this->cart->contents(), 'qty'));?> pcs</small></td>
-                            </tr>
-                            <tr>
-                                <th class="p-r-20"><small>Jumlah Berat (KG)</small></th>
-                                <td><small><?php echo ceil(($detailorder->totalWeight)/1000); ?> Kg</small></td>
-                            </tr>
-                        </table>
+                    <table>
+                        <tr>
+                            <th class="p-r-20"><small>Jumlah Pesanan</small></th>
+                            <td><small><?php echo array_sum(array_column($this->cart->contents(), 'qty')); ?> pcs</small></td>
+                        </tr>
+                        <tr>
+                            <th class="p-r-20"><small>Jumlah Berat (KG)</small></th>
+                            <td><small><?php echo ceil(($detailorder->totalWeight) / 1000); ?> Kg</small></td>
+                        </tr>
+                    </table>
                 </div>
-              <div class="flex-w flex-sb-m p-b-12">
+                <div class="flex-w flex-sb-m p-b-12">
                     <span class="s-text18 w-size19 w-full-sm">
                         Subtotal:
                     </span>
@@ -123,30 +123,36 @@
                     </span>
 
                     <span class="w-full-sm">
-                        Rp. <?php echo number_format($ordershiping->shipingCarge) . "  (" . $ordershiping->shipingName . ")"; if (empty($ordershiping->shipingCarge)){echo '<small><i>selesaikan proses</i></small>';}?> 
+                        Rp. <?php echo number_format($ordershiping->shipingCarge) . "  (" . $ordershiping->shipingName . ")";
+                            if (empty($ordershiping->shipingCarge)) {
+                                echo '<small><i>selesaikan proses</i></small>';
+                            } ?>
                     </span>
                 </div>
                 <div class="flex-w flex-sb-m p-b-12 bo20">
                     <span class="s-text18 w-size19 w-full-sm">
-                        Voucher : 
+                        Voucher :
                     </span>
 
                     <span class="w-full-sm">
-                        Rp. <?php echo number_format($orderresult->voucherPrice); if(empty($orderresult->voucherPrice)){echo '<small><i>Input Voucher</i></small>';} ?> 
+                        Rp. <?php echo number_format($orderresult->voucherPrice);
+                            if (empty($orderresult->voucherPrice)) {
+                                echo '<small><i>Input Voucher</i></small>';
+                            } ?>
                     </span>
                 </div>
                 <div class="flex-w flex-sb-m p-b-12 bo20">
                     <span class="s-text18 w-size19 w-full-sm">
-                        Discount Partner : 
+                        Discount Partner :
                     </span>
 
                     <span class="w-full-sm">
                         Rp. <?php
-                        echo number_format($orderresult->partnerDiscount);
-                        if (empty($orderresult->partnerDiscount)) {
-                            echo '<small><i>silahkan login</i></small>';
-                        }
-                        ?> 
+                            echo number_format($orderresult->partnerDiscount);
+                            if (empty($orderresult->partnerDiscount)) {
+                                echo '<small><i>silahkan login</i></small>';
+                            }
+                            ?>
                     </span>
                 </div>
                 <div class="flex-w flex-sb-m p-b-12 bo20">
@@ -169,8 +175,7 @@
     <?= $this->session->flashdata('MSG') ?>
 <?php } ?>
 <script type="text/javascript">
-    $(document).ready(function () {
-    });
+    $(document).ready(function() {});
 
     function applyVoucher() {
         var voucher = $('#vouchercode').val();
@@ -182,8 +187,11 @@
             $.ajax({
                 url: "<?php echo site_url('Product/search_code_voucher'); ?>",
                 method: "POST",
-                data: {voucher: voucher, totalprice:totalprice},
-                success: function (data) {
+                data: {
+                    voucher: voucher,
+                    totalprice: totalprice
+                },
+                success: function(data) {
                     $('#voucher').html(data);
                     $('.loading').remove();
                 }
@@ -200,8 +208,13 @@
         $.ajax({
             url: "<?php echo site_url('Order/use_voucher'); ?>",
             method: "POST",
-            data: {voucherprice: voucher, subtotal: subtotal, idorder: idorder, idvoucher: idvoucher},
-            success: function () {
+            data: {
+                voucherprice: voucher,
+                subtotal: subtotal,
+                idorder: idorder,
+                idvoucher: idvoucher
+            },
+            success: function() {
                 window.location.reload();
                 $('.loading').remove();
             }
@@ -209,4 +222,5 @@
     }
 </script>
 </body>
+
 </html>

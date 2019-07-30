@@ -35,7 +35,7 @@
                         </tr>
                         <tr>
                             <td><small>Alamat</small></td>
-                            <td><small><?php echo $detailorder->desa . ", " . $detailorder->rt . "-" . $detailorder->rw . ", " . $detailorder->kecamatan . ", " . $detailorder->namaKabupaten . ", " . $detailorder->namaProvinsi . ", " . $detailorder->kodePos; ?></small></td>
+                            <td><small><?php echo $detailorder->fullAddress . ", " . $detailorder->desa . ", " . $detailorder->rt . "-" . $detailorder->rw . ", " . $detailorder->kecamatan . ", " . $detailorder->namaKabupaten . ", " . $detailorder->namaProvinsi . ", " . $detailorder->kodePos; ?></small></td>
                         </tr>
                         <tr>
                             <td><small>Kontak</small></td>
@@ -91,15 +91,15 @@
                     Keranjang Belanja
                 </h5>
                 <div class="flex-w flex-sb-m p-b-12 bo20">
-                        <table>
-                    <?php foreach ($this->cart->contents() as $items) { ?>
+                    <table>
+                        <?php foreach ($this->cart->contents() as $items) { ?>
                             <tr>
                                 <th class="p-r-10"><small>(<?php echo $items['qty']; ?>)</small></th>
                                 <td class="p-r-10"><small> <?php echo $items['name']; ?></small></td>
                                 <td><small>Rp. <?php echo number_format($items['subtotal']); ?></small></td>
                             </tr>
-                    <?php } ?>
-                        </table>
+                        <?php } ?>
+                    </table>
                 </div>
                 <div class="flex-w flex-sb-m p-b-12 bo20">
                     <table>
@@ -128,37 +128,37 @@
                     </span>
                     <span class="w-full-sm">
                         Rp. <?php
-                        echo number_format($ordershiping->shipingCarge) . "  (" . $ordershiping->shipingName . ")";
-                        if (empty($ordershiping->shipingCarge)) {
-                            echo '<small><i>selesaikan proses</i></small>';
-                        }
-                        ?> 
+                            echo number_format($ordershiping->shipingCarge) . "  (" . $ordershiping->shipingName . ")";
+                            if (empty($ordershiping->shipingCarge)) {
+                                echo '<small><i>selesaikan proses</i></small>';
+                            }
+                            ?>
                     </span>
                 </div>
                 <div class="flex-w flex-sb-m p-b-12 bo20">
                     <span class="s-text18 w-size19 w-full-sm">
-                        Voucher : 
+                        Voucher :
                     </span>
                     <span class="w-full-sm">
                         Rp. <?php
-                        echo number_format($orderresult->voucherPrice);
-                        if (empty($orderresult->voucherPrice)) {
-                            echo '<small><i>selesaikan proses</i></small>';
-                        }
-                        ?> 
+                            echo number_format($orderresult->voucherPrice);
+                            if (empty($orderresult->voucherPrice)) {
+                                echo '<small><i>selesaikan proses</i></small>';
+                            }
+                            ?>
                     </span>
                 </div>
                 <div class="flex-w flex-sb-m p-b-12 bo20">
                     <span class="s-text18 w-size19 w-full-sm">
-                        Discount Partner : 
+                        Discount Partner :
                     </span>
                     <span class="w-full-sm">
                         Rp. <?php
-                        echo number_format($orderresult->partnerDiscount);
-                        if (empty($orderresult->partnerDiscount)) {
-                            echo '<small><i>silahkan login</i></small>';
-                        }
-                        ?> 
+                            echo number_format($orderresult->partnerDiscount);
+                            if (empty($orderresult->partnerDiscount)) {
+                                echo '<small><i>silahkan login</i></small>';
+                            }
+                            ?>
                     </span>
                 </div>
                 <div class="flex-w flex-sb-m p-b-12 bo20">
@@ -175,12 +175,12 @@
 </section>
 <?php echo $footer; ?>
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#dropshipper').hide();
         $.ajax({
             url: '<?php echo site_url('Cart/show_cart'); ?>',
             type: 'GET',
-            success: function (resp) {
+            success: function(resp) {
                 $('#data-cart').html(resp);
             }
         });
@@ -190,24 +190,22 @@
             var des = <?php echo $detailorder->codeKabupaten; ?>;
             var weight = <?php echo $detailorder->totalWeight; ?>;
 
-            if (weight === '0' || weight === '')
-            {
+            if (weight === '0' || weight === '') {
                 alert('null');
-            } else if (option === '')
-            {
+            } else if (option === '') {
                 alert('null');
-            } else
-            {
+            } else {
                 getOrigin(des, weight, option);
             }
         });
+
         function getOrigin(des, weight, cour) {
             var $op = $("#cost");
             var i, j, x = "";
             var add = <?php echo $shipinggateway->upCost; ?>;
             $('#cost').after('<i class="fa fa-spinner fa-pulse fa-2x fa-fw loading color0"></i>');
-            $.getJSON("<?php echo base_url('d/Shipinggateway/get_cost/') ?>" + des + "/" + weight + "/" + cour, function (data) {
-                $.each(data, function (i, field) {
+            $.getJSON("<?php echo base_url('d/Shipinggateway/get_cost/') ?>" + des + "/" + weight + "/" + cour, function(data) {
+                $.each(data, function(i, field) {
                     x += '<option selected="" value=""> Pilih Layanan </option>';
                     for (i in field.costs) {
                         for (j in field.costs[i].cost) {
@@ -220,6 +218,7 @@
             });
         }
     });
+
     function dropshipper() {
         var checkBox = document.getElementById("dropshippercheck");
         var text = document.getElementById("dropshipper");
@@ -231,4 +230,5 @@
     }
 </script>
 </body>
+
 </html>
