@@ -92,14 +92,17 @@
             <?php } ?>
             <div class="p-t-5 p-b-10">
                 <div class="flex-m flex-w p-b-10">
+
                     <div class="m-text19 p-r-5">
                         Jumlah
                     </div>
+
                     <div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
-
+                        <button class="btn btn-success btn-circle btn-circle-sm m-1" type="button" id="btn-kurang" disabled="" onclick="kurangQty();"> <i class="fa fa-minus"></i> </button>
                         <input class="size8 m-text18 t-center" type="number" name="qty" id="qty" value="1" min="1" max="<?php echo $productdetail->quantityStock; ?>" onchange="totalPrice();">
-
+                        <button class="btn btn-success btn-circle btn-circle-sm m-1" type="button" id="btn-tambah" onclick="tambahQty();"> <i class="fa fa-plus"></i> </button>
                     </div>
+
 
                     <div class="p-t-5 p-b-10">
                         <div class="flex-m flex-w">
@@ -588,6 +591,31 @@
                 $('#totalprice').html(resp);
             }
         });
+    }
+
+    function tambahQty() {
+        var qty = parseInt($('#qty').val());
+        qty = qty + 1;
+        if (qty > 1) {
+            document.getElementById("btn-kurang").disabled = false;
+        } else {
+            document.getElementById("btn-kurang").disabled = true;
+        }
+        document.getElementById("qty").value = qty;
+        totalPrice();
+
+    }
+
+    function kurangQty() {
+        var qty = parseInt($('#qty').val());
+        qty = qty - 1;
+        if (qty > 1) {
+            document.getElementById("btn-kurang").disabled = false;
+        } else {
+            document.getElementById("btn-kurang").disabled = true;
+        }
+        document.getElementById("qty").value = qty;
+        totalPrice();
     }
 
     <?php if (!empty($fbpixel)) { ?>

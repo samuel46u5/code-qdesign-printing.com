@@ -1,18 +1,21 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('Asia/Bangkok');
 
-class Order extends CI_Controller {
+class Order extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
-        $this->load->model(array('M_widget','M_company', 'M_bank', 'M_category', 'M_order', 'M_invoice', 'M_design', 'M_product', 'M_notify'));
+        $this->load->model(array('M_widget', 'M_company', 'M_bank', 'M_category', 'M_order', 'M_invoice', 'M_design', 'M_product', 'M_notify'));
         $this->load->database();
         $this->load->helper('url', 'date');
     }
 
-    function form_track_order() {
+    function form_track_order()
+    {
         $profil = $this->M_company->data_company()->row();
         $data['title'] = "Lacak Order Belanja | " . $profil->companyName;
         $data['logo'] = $this->M_design->data_banner_by_pos("logo")->row();
@@ -28,7 +31,8 @@ class Order extends CI_Controller {
         $this->load->view('frontend/track_order', $data);
     }
 
-    function track_order_result() {
+    function track_order_result()
+    {
         $profil = $this->M_company->data_company()->row();
         $data['title'] = "Lacak Order Belanja | " . $profil->companyName;
         $idorder = $this->input->get('idorder');
@@ -49,7 +53,8 @@ class Order extends CI_Controller {
         $this->load->view('frontend/track_order_result', $data);
     }
 
-    function store_data_customer() {
+    function store_data_customer()
+    {
         $idorderget = $this->input->get('idorder');
         $cek = $this->M_order->cek_order_id($idorderget)->row();
         $idpartner = $this->session->userdata('idpartner');
@@ -133,7 +138,8 @@ class Order extends CI_Controller {
         redirect('pages/cart/shiping?idorder=' . $idorder . '');
     }
 
-    function get_nama_provinsi($provinsi) {
+    function get_nama_provinsi($provinsi)
+    {
         $this->load->library('Rajaongkir');
         $rajaongkir = new Rajaongkir;
         $provinsiname = $rajaongkir->_api_ongkir('province?id=' . $provinsi . '');
@@ -142,7 +148,8 @@ class Order extends CI_Controller {
         return str_replace('"', " ", $result);
     }
 
-    function get_nama_kota($kota, $provinsi) {
+    function get_nama_kota($kota, $provinsi)
+    {
         $this->load->library('Rajaongkir');
         $rajaongkir = new Rajaongkir;
         $kotaname = $rajaongkir->_api_ongkir('city?id=' . $kota . '&province=' . $provinsi . '');
@@ -151,7 +158,8 @@ class Order extends CI_Controller {
         return str_replace('"', " ", $result);
     }
 
-    function store_shiping() {
+    function store_shiping()
+    {
         $idorder = $this->input->get('idorder');
         $subtotal = $this->input->post('subtotal');
         $kurir = $this->input->post('kurir');
@@ -197,7 +205,8 @@ class Order extends CI_Controller {
         redirect('pages/cart/payment?idorder=' . $idorder . '');
     }
 
-    function use_voucher() {
+    function use_voucher()
+    {
         $idorder = $this->input->post('idorder');
         $idvoucher = $this->input->post('idvoucher');
         $voucherprice = $this->input->post('voucherprice');
@@ -218,7 +227,8 @@ class Order extends CI_Controller {
         }
     }
 
-    function store_payment() {
+    function store_payment()
+    {
         $idorder = $this->input->get('idorder');
         $idbank = $this->input->post('bank');
 
@@ -265,7 +275,8 @@ class Order extends CI_Controller {
         redirect('pages/invoice?idorder=' . $idorder . '');
     }
 
-    function update_stock_product($idorder) {
+    function update_stock_product($idorder)
+    {
         $dataorderdetail = $this->M_order->data_detail_order_product($idorder)->result();
         $dataproduct = array();
         foreach ($dataorderdetail as $value) {
@@ -284,7 +295,8 @@ class Order extends CI_Controller {
         $this->M_product->update_stock_product($dataproduct);
     }
 
-    function store_reminder_orderin($idorder){
+    function store_reminder_orderin($idorder)
+    {
         $data = array(
             'notifyName' => 'Closing Unpaid',
             'idorder' => $idorder,
@@ -292,5 +304,4 @@ class Order extends CI_Controller {
         );
         $this->M_notify->store_reminder_orderin($data);
     }
-
 }
